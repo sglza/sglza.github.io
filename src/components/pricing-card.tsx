@@ -24,7 +24,7 @@ export const PricingCard = () => {
 
   const actionCopy = (() => {
     if (planIndex === 0) {
-      return "Get full report";
+      return "Buy";
     }
     if (planIndex === PLAN_AMOUNTS.length - 1) {
       return "Contact us";
