@@ -27,9 +27,8 @@ export default function Home() {
               DD360
             </a>{" "}
             <span>for the past </span>
-            <span className="relative inline-flex w-24 max-w-24 overflow-hidden">
+            <span className="inline-flex w-24 max-w-24 overflow-hidden bg-clip-text text-transparent bg-gradient-to-l from-white to-black">
               <Age beggining={1699250400000} />
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-l from-white to-transparent" />
             </span>{" "}
             <span>years.</span>
           </div>
