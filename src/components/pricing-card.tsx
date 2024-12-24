@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { toast } from "sonner";
 import {
   MdOutlineAdd,
   MdOutlineDiamond,
@@ -164,7 +165,11 @@ export const PricingCard = () => {
             <div className="border-t border-black/10" />
             <Button
               className="relative w-full overflow-hidden self-end transition-all gap-0 active:scale-[.99]"
-              onClick={() => console.log("Clicked")}
+              onClick={() =>
+                toast("Action triggered", {
+                  description: "This is an example :)",
+                })
+              }
             >
               <AnimatePresence mode="sync" initial={false}>
                 <motion.span
