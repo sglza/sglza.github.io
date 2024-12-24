@@ -139,7 +139,7 @@ export const PricingCard = () => {
               layout
               className="flex items-center justify-between text-primary"
             >
-              <p className="text-body-m">Amount</p>
+              <p className="text-sm">Amount</p>
               <div className="flex items-center gap-3">
                 <Button
                   className="rounded-full w-9 active:scale-95"
