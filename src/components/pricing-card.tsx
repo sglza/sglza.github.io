@@ -7,7 +7,7 @@ import {
   MdOutlineDiamond,
   MdOutlineRemove,
 } from "react-icons/md";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import NumberFlow from "@number-flow/react";
 
 import { Button } from "./ui/button";

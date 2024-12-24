@@ -1,6 +1,7 @@
 import { Card, CardHeader } from "@/components/ui/card";
 import { TextTransition } from "@/components/text-transition";
 import { PricingCard } from "@/components/pricing-card";
+import { Appear } from "@/components/appear";
 
 export default function UI() {
   return (
@@ -10,14 +11,18 @@ export default function UI() {
           <p className="whitespace-nowrap font-bold text-2xl">UI</p>
         </TextTransition>
         <div className="grid grid-cols-1 md:grid-cols-[200px,auto] gap-8 w-full">
-          <p className="font-semibold whitespace-nowrap">
-            Dynamic pricing card
-          </p>
-          <Card className="flex flex-col items-center justify-center w-full">
-            <CardHeader className="py-16">
-              <PricingCard />
-            </CardHeader>
-          </Card>
+          <Appear>
+            <p className="font-semibold whitespace-nowrap">
+              Dynamic pricing card
+            </p>
+          </Appear>
+          <Appear>
+            <Card className="flex flex-col items-center justify-center w-full">
+              <CardHeader className="py-16">
+                <PricingCard />
+              </CardHeader>
+            </Card>
+          </Appear>
         </div>
       </main>
     </div>
