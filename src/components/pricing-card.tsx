@@ -83,17 +83,21 @@ export const PricingCard = () => {
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0, transition: { delay: 0.3 } }}
-                    exit={{ opacity: 0, y: -10 }}
+                    exit={{ opacity: 0, y: -10, transition: { duration: 0.1 } }}
                     className="flex items-center gap-1"
                   >
                     <p className="text-s line-through">
                       <AnimatePresence mode="popLayout" initial={false}>
                         <motion.span
                           key={supposedPlanPrice}
-                          initial={{ opacity: 1, filter: "blur(1px)" }}
+                          initial={{ opacity: 1, filter: "blur(2px)" }}
                           animate={{ opacity: 1, filter: "blur(0)" }}
-                          exit={{ opacity: 0, filter: "blur(1px)" }}
-                          transition={{ type: "spring", duration: 0.5 }}
+                          exit={{
+                            opacity: 0,
+                            filter: "blur(2px)",
+                            transition: { duration: 0.2 },
+                          }}
+                          transition={{ type: "tween", duration: 0.7 }}
                           className="overflow-hidden"
                         >
                           $ {supposedPlanPrice}
@@ -118,7 +122,7 @@ export const PricingCard = () => {
                 )}
               </AnimatePresence>
               <motion.p layout className="text-xs">
-                {planIndex === 0 ? "Single payment" : "Monthly payment"}
+                {planIndex === 0 ? "Pay once" : "Billed monthly"}
               </motion.p>
             </div>
             <motion.div layout className="flex flex-col gap-3">
@@ -137,7 +141,7 @@ export const PricingCard = () => {
               <p className="text-body-m">Amount</p>
               <div className="flex items-center gap-3">
                 <Button
-                  className="rounded-full w-9"
+                  className="rounded-full w-9 active:scale-95"
                   onClick={() => handleChangePlan(planIndex - 1)}
                   disabled={planIndex === 0}
                 >
@@ -147,7 +151,7 @@ export const PricingCard = () => {
                   {planAmount}
                 </div>
                 <Button
-                  className="rounded-full w-9"
+                  className="rounded-full w-9 active:scale-95"
                   onClick={() => handleChangePlan(planIndex + 1)}
                   disabled={planIndex === PLAN_AMOUNTS.length - 1}
                 >
@@ -159,7 +163,7 @@ export const PricingCard = () => {
           <motion.div layout className="flex flex-col gap-4">
             <div className="border-t border-black/10" />
             <Button
-              className="relative w-full overflow-hidden self-end transition-all gap-0"
+              className="relative w-full overflow-hidden self-end transition-all gap-0 active:scale-[.99]"
               onClick={() => console.log("Clicked")}
             >
               <AnimatePresence mode="sync" initial={false}>
@@ -193,9 +197,9 @@ export const PricingCard = () => {
       <AnimatePresence>
         {planIndex > 0 && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.1 } }}
             className="flex items-center gap-1 absolute rounded-full px-2.5 py-1 font-semibold text-xs bg-primary text-white right-4 -top-3"
           >
             <MdOutlineDiamond /> Recommended
