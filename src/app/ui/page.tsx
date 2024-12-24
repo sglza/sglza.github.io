@@ -9,7 +9,7 @@ export default function UI() {
         <TextTransition>
           <p className="whitespace-nowrap font-bold text-2xl">UI</p>
         </TextTransition>
-        <div className="flex flex-col md:flex-row gap-8 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-[200px,auto] gap-8 w-full">
           <p className="font-semibold whitespace-nowrap">
             Dynamic pricing card
           </p>
