@@ -29,7 +29,7 @@ export default function Home() {
             <span>for the past </span>
             <span className="relative inline-flex w-24 max-w-24 overflow-hidden">
               <Age beggining={1699250400000} />
-              <div className="absolute top-0 left-2 w-full h-full bg-gradient-to-l from-black to-transparent" />
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-l from-white to-transparent" />
             </span>{" "}
             <span>years.</span>
           </div>

@@ -1,4 +1,6 @@
+import { Card, CardHeader } from "@/components/ui/card";
 import { TextTransition } from "@/components/text-transition";
+import { PricingCard } from "@/components/pricing-card";
 
 export default function UI() {
   return (
@@ -7,20 +9,16 @@ export default function UI() {
         <TextTransition>
           <p className="whitespace-nowrap font-bold text-2xl">UI</p>
         </TextTransition>
-        <TextTransition
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          delay={0.2}
-        >
-          <p className="whitespace-nowrap">Dynamic pricing card</p>
-        </TextTransition>
-        <TextTransition
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          delay={0.2}
-        >
-          <p className="whitespace-nowrap">Dynamic form</p>
-        </TextTransition>
+        <div className="flex flex-col md:flex-row gap-8 w-full">
+          <p className="font-semibold whitespace-nowrap">
+            Dynamic pricing card
+          </p>
+          <Card className="flex flex-col items-center justify-center w-full">
+            <CardHeader className="py-16">
+              <PricingCard />
+            </CardHeader>
+          </Card>
+        </div>
       </main>
     </div>
   );
