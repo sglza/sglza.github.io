@@ -1,5 +1,6 @@
 import { Card, CardHeader } from "@/components/ui/card";
 import { TextTransition } from "@/components/text-transition";
+import { DynamicForm } from "@/components/dynamic-form";
 import { PricingCard } from "@/components/pricing-card";
 import { Appear } from "@/components/appear";
 
@@ -17,9 +18,21 @@ export default function UI() {
             </p>
           </Appear>
           <Appear>
-            <Card className="flex flex-col items-center justify-center w-full">
+            <Card className="flex flex-col items-center justify-center w-full min-h-[600px]">
               <CardHeader className="py-16">
                 <PricingCard />
+              </CardHeader>
+            </Card>
+          </Appear>
+          <Appear>
+            <p className="font-semibold whitespace-nowrap">
+              Dynamic survey form
+            </p>
+          </Appear>
+          <Appear>
+            <Card className="flex flex-col items-center justify-center w-full min-h-[600px]">
+              <CardHeader className="py-16">
+                <DynamicForm />
               </CardHeader>
             </Card>
           </Appear>

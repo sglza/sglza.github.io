@@ -1,5 +1,8 @@
+"use client";
+
 import { useState, useRef, useEffect, ComponentProps } from "react";
 import { motion } from "framer-motion";
+
 import { cn } from "@/lib/utils";
 
 interface AnimatedHeightProps {
