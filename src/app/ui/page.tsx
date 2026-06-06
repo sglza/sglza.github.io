@@ -31,7 +31,8 @@ export default function UI() {
             <div className="flex flex-col gap-1 pt-12">
               <p className="font-semibold">Dynamic survey form</p>
               <p className="text-sm text-muted-foreground">
-                A feedback form that expands based on the selected sentiment.
+                A feedback form where neutral responses submit directly and
+                stronger reactions ask for more detail.
               </p>
             </div>
             <div className="w-full">
