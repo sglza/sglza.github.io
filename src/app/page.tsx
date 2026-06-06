@@ -167,7 +167,7 @@ function HighlightPreviewCard({ highlight }: { highlight: PersonalHighlight }) {
             </>
           )}
         </div>
-        <div className="px-2 pt-3 pb-1">
+        <div className="px-2 pt-3 pb-1 text-pretty">
           <p className="text-muted-foreground text-sm">{highlight.caption}</p>
         </div>
       </PreviewCardPopup>
