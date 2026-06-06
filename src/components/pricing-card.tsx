@@ -1,11 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  MdOutlineAdd,
-  MdOutlineDiamond,
-  MdOutlineRemove,
-} from "react-icons/md";
+import { MdOutlineAdd, MdOutlineRemove } from "react-icons/md";
 import { AnimatePresence, motion } from "motion/react";
 import NumberFlow from "@number-flow/react";
 
@@ -75,7 +71,15 @@ export const PricingCard = () => {
                     {!isCustomPlan && (
                       <motion.span
                         layout
-                        transition={{ type: "spring", bounce: 0.2 }}
+                        key={isCustomPlan ? "custom" : "price"}
+                        initial={{ opacity: 0, filter: "blur(4px)" }}
+                        animate={{ opacity: 1, filter: "blur(0)" }}
+                        exit={{ opacity: 0, filter: "blur(4px)" }}
+                        transition={{
+                          type: "spring",
+                          duration: 0.5,
+                          bounce: 0.2,
+                        }}
                         className="text-base"
                       >
                         USD
@@ -110,7 +114,11 @@ export const PricingCard = () => {
                                   opacity: 0,
                                   filter: "blur(4px)",
                                 }}
-                                transition={{ type: "spring", duration: 0.5 }}
+                                transition={{
+                                  type: "spring",
+                                  duration: 0.5,
+                                  bounce: 0.2,
+                                }}
                                 className="overflow-hidden"
                               >
                                 $ {supposedPlanPrice}
@@ -193,21 +201,18 @@ export const PricingCard = () => {
                     })
                   }
                 >
-                  <AnimatePresence mode="sync" initial={false}>
+                  <AnimatePresence mode="popLayout" initial={false}>
                     <motion.span
                       key={actionCopy}
                       initial={{
-                        width: 0,
                         filter: "blur(4px)",
                         opacity: 0,
                       }}
                       animate={{
-                        width: "auto",
                         filter: "blur(0)",
                         opacity: 1,
                       }}
                       exit={{
-                        width: 0,
                         filter: "blur(4px)",
                         opacity: 0,
                       }}
