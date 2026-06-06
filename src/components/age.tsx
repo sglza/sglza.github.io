@@ -11,13 +11,15 @@ export const Age = ({ beggining = 939790800000 }: AgeProps) => {
   const [age, setAge] = useState("");
 
   useEffect(() => {
-    setInterval(() => {
+    const intervalId = window.setInterval(() => {
       const age = dayjs()
         .diff(dayjs(beggining), "year", true)
         .toString()
         .substring(0, 12);
       setAge(age);
     }, 50);
+
+    return () => window.clearInterval(intervalId);
   }, [beggining]);
 
   return age;
