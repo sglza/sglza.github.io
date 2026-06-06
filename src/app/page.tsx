@@ -6,6 +6,7 @@ import marceImage from "../../public/marce.jpeg";
 import surfingImage from "../../public/surfing.jpeg";
 
 import { Age } from "@/components/age";
+import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { TextTransition } from "@/components/text-transition";
 import {
@@ -51,65 +52,68 @@ const personalHighlights: readonly PersonalHighlight[] = [
 export default function Home() {
   return (
     <PageTransition>
-      <div className="flex items-center justify-center min-h-[100dvh] p-8 pb-20 gap-16 sm:p-20">
-        <main className="flex flex-col gap-8 row-start-2 items-start max-w-screen-lg w-full">
-          <TextTransition>
-            <p className="whitespace-nowrap">¡Hola! I&apos;m Santiago.</p>
-          </TextTransition>
-          <TextTransition
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            delay={0.5}
-          >
-            <p>Most people call me Santi.</p>
-            <div>
-              <span>I&apos;ve been working as a Frontend Engineer @ </span>
-              <a
-                className="font-bold underline underline-offset-4"
-                href="https://dd360.mx/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                DD360
-              </a>{" "}
-              <span>for the past </span>
-              <span className="inline-flex w-24 max-w-24 overflow-hidden bg-gradient-to-l from-background to-foreground bg-clip-text text-transparent">
-                <Age beggining={1699250400000} />
-              </span>{" "}
-              <span>years.</span>
-            </div>
-          </TextTransition>
-          <TextTransition
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            delay={0.5}
-          >
-            <p>
-              I like to experiment creating beautiful web components, you can
-              check some of them out{" "}
-              <Link
-                href="/ui"
-                className="font-bold underline underline-offset-4"
-                transitionTypes={["nav-forward"]}
-              >
-                here
-              </Link>
-              .
-            </p>
-          </TextTransition>
-          <TextTransition
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            delay={0.5}
-          >
-            <p>
-              I also like to go{" "}
-              <HighlightPreviewCard highlight={personalHighlights[2]} />,{" "}
-              <HighlightPreviewCard highlight={personalHighlights[1]} />, and be
-              with the{" "}
-              <HighlightPreviewCard highlight={personalHighlights[0]} />.
-            </p>
-          </TextTransition>
+      <div className="min-h-[100dvh]">
+        <PageHeader />
+        <main className="mx-auto flex min-h-[calc(100dvh-5rem)] w-full max-w-screen-lg items-center px-4 pt-8 pb-16 sm:min-h-[calc(100dvh-6rem)] sm:px-8 sm:pt-10 sm:pb-20 lg:px-12">
+          <div className="flex w-full flex-col items-start gap-8">
+            <TextTransition>
+              <p className="whitespace-nowrap">¡Hola! I&apos;m Santiago.</p>
+            </TextTransition>
+            <TextTransition
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              delay={0.5}
+            >
+              <p>Most people call me Santi.</p>
+              <div>
+                <span>I&apos;ve been working as a Frontend Engineer @ </span>
+                <a
+                  className="font-bold underline underline-offset-4"
+                  href="https://dd360.mx/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  DD360
+                </a>{" "}
+                <span>for the past </span>
+                <span className="inline-flex w-24 max-w-24 overflow-hidden bg-gradient-to-l from-background to-foreground bg-clip-text text-transparent">
+                  <Age beggining={1699250400000} />
+                </span>{" "}
+                <span>years.</span>
+              </div>
+            </TextTransition>
+            <TextTransition
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              delay={0.5}
+            >
+              <p>
+                I like to experiment creating beautiful web components, you can
+                check some of them out{" "}
+                <Link
+                  href="/ui"
+                  className="font-bold underline underline-offset-4"
+                  transitionTypes={["nav-forward"]}
+                >
+                  here
+                </Link>
+                .
+              </p>
+            </TextTransition>
+            <TextTransition
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              delay={0.5}
+            >
+              <p>
+                I also like to go{" "}
+                <HighlightPreviewCard highlight={personalHighlights[2]} />,{" "}
+                <HighlightPreviewCard highlight={personalHighlights[1]} />, and
+                be with the{" "}
+                <HighlightPreviewCard highlight={personalHighlights[0]} />.
+              </p>
+            </TextTransition>
+          </div>
         </main>
       </div>
     </PageTransition>

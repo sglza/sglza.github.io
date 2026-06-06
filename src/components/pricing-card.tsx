@@ -47,7 +47,9 @@ export const PricingCard = () => {
           <AnimatedHeight padding="p-6" className="relative h-fit">
             <div className="relative flex flex-col gap-3">
               <div className="flex items-center gap-2">
-                <h3 className="text-xl font-extrabold text-primary">Advanced</h3>
+                <h3 className="text-xl font-extrabold text-primary">
+                  Advanced
+                </h3>
               </div>
               <div className="border-t border-border" />
               <div className="flex flex-col gap-6">
@@ -121,14 +123,14 @@ export const PricingCard = () => {
                         >
                           USD
                         </motion.span>
-                        <motion.p
-                          layout
-                          className="rounded-full bg-[#D3FFD5] px-1.5 py-1 text-xs text-black"
-                        >
-                          {((1 - planPrice / supposedPlanPrice) * 100).toFixed(
-                            0,
-                          )}
-                          % OFF
+                        <motion.p layout>
+                          <Badge variant="success">
+                            {(
+                              (1 - planPrice / supposedPlanPrice) *
+                              100
+                            ).toFixed(0)}
+                            % OFF
+                          </Badge>
                         </motion.p>
                       </motion.div>
                     )}
@@ -228,7 +230,7 @@ export const PricingCard = () => {
             exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.1 } }}
             className="absolute right-4 -top-3"
           >
-            <Badge className="gap-1 rounded-full px-2.5 py-1">
+            <Badge>
               <MdOutlineDiamond aria-hidden="true" />
               Recommended
             </Badge>
