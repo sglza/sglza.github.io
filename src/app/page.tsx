@@ -52,9 +52,9 @@ const personalHighlights: readonly PersonalHighlight[] = [
 export default function Home() {
   return (
     <PageTransition>
-      <div className="min-h-[100dvh]">
+      <div className="min-h-dvh">
         <PageHeader />
-        <main className="mx-auto flex min-h-[calc(100dvh-5rem)] w-full max-w-screen-lg items-center px-4 pt-8 pb-16 sm:min-h-[calc(100dvh-6rem)] sm:px-8 sm:pt-10 sm:pb-20 lg:px-12">
+        <main className="mx-auto flex min-h-[calc(100dvh-5rem)] w-full max-w-5xl items-center px-4 pt-8 pb-16 sm:min-h-[calc(100dvh-6rem)] sm:px-8 sm:pt-10 sm:pb-20 lg:px-12">
           <div className="flex w-full flex-col items-start gap-8">
             <TextTransition>
               <p className="whitespace-nowrap">¡Hola! I&apos;m Santiago.</p>
@@ -76,7 +76,7 @@ export default function Home() {
                   DD360
                 </a>{" "}
                 <span>for the past </span>
-                <span className="inline-flex w-24 max-w-24 overflow-hidden bg-gradient-to-l from-background to-foreground bg-clip-text text-transparent">
+                <span className="inline-flex w-24 max-w-24 overflow-hidden bg-linear-to-l from-background to-foreground bg-clip-text text-transparent">
                   <Age beggining={1699250400000} />
                 </span>{" "}
                 <span>years.</span>
@@ -120,11 +120,7 @@ export default function Home() {
   );
 }
 
-function HighlightPreviewCard({
-  highlight,
-}: {
-  highlight: PersonalHighlight;
-}) {
+function HighlightPreviewCard({ highlight }: { highlight: PersonalHighlight }) {
   return (
     <PreviewCard>
       <PreviewCardTrigger
@@ -167,7 +163,7 @@ function HighlightPreviewCard({
                 src={highlight.image}
                 unoptimized
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent" />
             </>
           )}
         </div>
