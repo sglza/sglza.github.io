@@ -1,8 +1,5 @@
-import Link from "next/link";
-import { ArrowLeftIcon } from "lucide-react";
-
+import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
-import { Button } from "@/components/ui/button";
 import { Frame, FramePanel } from "@/components/ui/frame";
 import { DynamicForm } from "@/components/dynamic-form";
 import { PricingCard } from "@/components/pricing-card";
@@ -10,37 +7,43 @@ import { PricingCard } from "@/components/pricing-card";
 export default function UI() {
   return (
     <PageTransition>
-      <div className="flex items-start justify-center min-h-[100dvh] p-8 pb-20 gap-16 sm:p-20">
-        <main className="flex flex-col gap-8 row-start-2 items-start max-w-screen-lg w-full">
-          <div className="flex w-full flex-col items-start gap-4">
-            <Button
-              render={
-                <Link href="/" transitionTypes={["nav-back"]} />
-              }
-              size="sm"
-              variant="ghost"
-            >
-              <ArrowLeftIcon aria-hidden="true" />
-              Back Home
-            </Button>
-          </div>
-          <div className="grid w-full grid-cols-1 gap-10 md:grid-cols-[200px,auto]">
-            <p className="whitespace-nowrap font-semibold">
-              Dynamic pricing card
-            </p>
-            <Frame className="w-full">
-              <FramePanel className="flex min-h-[28rem] items-center justify-center p-8 md:p-10">
+      <div className="min-h-dvh">
+        <PageHeader backHref="/" backLabel="Back Home" />
+        <main className="mx-auto w-full max-w-5xl px-4 pt-8 pb-16 sm:px-8 sm:pt-10 sm:pb-20 lg:px-12">
+          <div className="grid w-full grid-cols-1 gap-8 md:gap-y-4 md:grid-cols-[200px,auto] md:gap-x-10">
+            <div className="flex flex-col gap-1 md:pt-4">
+              <p className="font-semibold">Dynamic pricing card</p>
+              <p className="text-sm text-muted-foreground">
+                A plan selector that updates pricing, savings, and CTA copy in
+                place.
+              </p>
+            </div>
+            <div className="w-full">
+              <div className="flex justify-center sm:hidden">
                 <PricingCard />
-              </FramePanel>
-            </Frame>
-            <p className="whitespace-nowrap font-semibold">
-              Dynamic survey form
-            </p>
-            <Frame className="w-full">
-              <FramePanel className="flex min-h-[28rem] items-center justify-center p-8 md:p-10">
+              </div>
+              <Frame className="hidden w-full sm:block">
+                <FramePanel className="flex min-h-125 items-center justify-center p-6 sm:p-8 md:p-10">
+                  <PricingCard />
+                </FramePanel>
+              </Frame>
+            </div>
+            <div className="flex flex-col gap-1 pt-12">
+              <p className="font-semibold">Dynamic survey form</p>
+              <p className="text-sm text-muted-foreground">
+                A feedback form that expands based on the selected sentiment.
+              </p>
+            </div>
+            <div className="w-full">
+              <div className="flex justify-center sm:hidden">
                 <DynamicForm />
-              </FramePanel>
-            </Frame>
+              </div>
+              <Frame className="hidden w-full sm:block">
+                <FramePanel className="flex min-h-100 items-center justify-center p-6 sm:p-8 md:p-10">
+                  <DynamicForm />
+                </FramePanel>
+              </Frame>
+            </div>
           </div>
         </main>
       </div>

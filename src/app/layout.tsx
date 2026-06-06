@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 
 import { ThemeProvider } from "@/components/theme-provider";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { AnchoredToastProvider, ToastProvider } from "@/components/ui/toast";
 import "./globals.css";
 
@@ -27,7 +26,6 @@ export default function RootLayout({
         <ThemeProvider>
           <ToastProvider>
             <AnchoredToastProvider>
-              <ThemeToggle />
               {children}
             </AnchoredToastProvider>
           </ToastProvider>

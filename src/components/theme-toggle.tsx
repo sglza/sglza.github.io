@@ -43,7 +43,7 @@ export function ThemeToggle() {
   };
 
   return (
-    <div className="fixed top-5 right-5 z-50">
+    <div className="shrink-0">
       <Toggle
         aria-label={
           isDark || !mounted ? "Switch to light theme" : "Switch to dark theme"
