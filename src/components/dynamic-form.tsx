@@ -15,6 +15,7 @@ import { Card, CardPanel } from "./ui/card";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import { AnimatedHeight } from "./animated-height";
+import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
 
 const SELECTION_STATES = {
   Unselected: -1,
@@ -30,21 +31,21 @@ export const SURVEY_OPTIONS: {
 }[] = [
   {
     value: 0,
-    label: "Not great",
+    label: "Bad",
     icon: (
       <MdOutlineSentimentDissatisfied className="w-[14px] h-[14px] min-w-[14px] min-h-[14px]" />
     ),
   },
   {
     value: 1,
-    label: "Okay",
+    label: "Good",
     icon: (
       <MdOutlineCheck className="w-[14px] h-[14px] min-w-[14px] min-h-[14px]" />
     ),
   },
   {
     value: 2,
-    label: "Loved it",
+    label: "Great",
     icon: (
       <MdOutlineSentimentVerySatisfied className="w-[14px] h-[14px] min-w-[14px] min-h-[14px]" />
     ),
@@ -54,7 +55,6 @@ export const SURVEY_OPTIONS: {
 type SelectionState = (typeof SELECTION_STATES)[keyof typeof SELECTION_STATES];
 
 export const DynamicForm = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<SelectionState>(
     SELECTION_STATES.Unselected,
   );
@@ -64,11 +64,15 @@ export const DynamicForm = () => {
   const isUnselected = selected === SELECTION_STATES.Unselected;
   const isAdequate = selected === SELECTION_STATES.Adequate;
 
-  const handleSelectOption = (option: SelectionState) => {
-    if (!isOpen) {
-      setIsOpen(true);
+  const handleSelectOption = (groupValue: string[]) => {
+    const nextValue = groupValue[0];
+
+    if (nextValue === undefined) {
+      setSelected(SELECTION_STATES.Unselected);
+      return;
     }
-    setSelected(option);
+
+    setSelected(Number(nextValue) as SelectionState);
   };
 
   const handleChangeReason = (
@@ -79,98 +83,102 @@ export const DynamicForm = () => {
 
   return (
     <div className="w-fit max-w-full">
-      <Card className="w-fit max-w-full">
+      <Card className="w-72 max-w-full">
         <CardPanel className="p-0">
           <AnimatedHeight padding="p-4">
-            <div className="flex w-full flex-col gap-2">
-              <h3 className="font-semibold text-sm">
-                How was your experience with this page?
-              </h3>
-              <div className="flex justify-between gap-2">
-                {SURVEY_OPTIONS?.map(({ label, value, icon }) => (
-                  <Button
-                    key={label}
-                    variant={selected === value ? "default" : "ghost"}
-                    onClick={() => handleSelectOption(value)}
-                  >
-                    <span aria-hidden="true">{icon}</span>
-                    {label}
-                  </Button>
-                ))}
-              </div>
-            </div>
+            <div className="flex w-full flex-col gap-4">
+              <h3 className="text-base">How was your experience?</h3>
 
-            <div className="flex flex-col gap-2">
-              <AnimatePresence initial={false} mode="popLayout">
-                {!isUnselected && !isAdequate && (
-                  <motion.div
-                    layout
-                    exit={{
-                      opacity: 0,
-                      scale: 0,
-                    }}
-                    className="mt-3 flex flex-col gap-2"
-                  >
+              <div className="flex flex-col gap-3">
+                <ToggleGroup
+                  aria-label="Experience feedback"
+                  className="w-full"
+                  value={isUnselected ? [] : [String(selected)]}
+                  onValueChange={handleSelectOption}
+                  variant="outline"
+                >
+                  {SURVEY_OPTIONS?.map(({ label, value, icon }) => (
+                    <ToggleGroupItem
+                      key={label}
+                      className="flex-1"
+                      value={String(value)}
+                    >
+                      <span aria-hidden="true">{icon}</span>
+                      {label}
+                    </ToggleGroupItem>
+                  ))}
+                </ToggleGroup>
+
+                <AnimatePresence initial={false} mode="popLayout">
+                  {!isUnselected && !isAdequate && (
                     <motion.div
-                      transition={{
-                        type: "spring",
-                        duration: 0.4,
-                        bounce: 0.2,
-                      }}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
+                      layout
                       exit={{
                         opacity: 0,
                         scale: 0,
-                        transition: { delay: 0.05 },
                       }}
+                      className="flex flex-col gap-2"
                     >
-                      <Textarea
-                        name="reason"
-                        value={reason}
-                        className="min-h-32"
-                        placeholder={
-                          selected === SELECTION_STATES.Low
-                            ? "What could we improve?"
-                            : "What stood out to you?"
-                        }
-                        onChange={handleChangeReason}
-                      />
+                      <motion.div
+                        transition={{
+                          type: "spring",
+                          duration: 0.4,
+                          bounce: 0.2,
+                        }}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{
+                          opacity: 0,
+                          scale: 0,
+                          transition: { delay: 0.05 },
+                        }}
+                      >
+                        <Textarea
+                          name="reason"
+                          value={reason}
+                          className="min-h-32"
+                          placeholder={
+                            selected === SELECTION_STATES.Low
+                              ? "What could we improve?"
+                              : "What stood out to you?"
+                          }
+                          onChange={handleChangeReason}
+                        />
+                      </motion.div>
                     </motion.div>
+                  )}
+                </AnimatePresence>
+                {!isUnselected && (
+                  <motion.div
+                    layout
+                    transition={{
+                      type: "spring",
+                      duration: 0.7,
+                      bounce: 0.15,
+                      delay:
+                        previousSelected === SELECTION_STATES.Unselected &&
+                        !isAdequate
+                          ? 0.2
+                          : 0,
+                    }}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                  >
+                    <Button
+                      className="w-full"
+                      type="button"
+                      onClick={() =>
+                        toastManager.add({
+                          title: "Action triggered",
+                          description: "This is an example :)",
+                        })
+                      }
+                    >
+                      Submit
+                    </Button>
                   </motion.div>
                 )}
-              </AnimatePresence>
-              {!isUnselected && (
-                <motion.div
-                  layout
-                  transition={{
-                    type: "spring",
-                    duration: 0.7,
-                    bounce: 0.15,
-                    delay:
-                      previousSelected === SELECTION_STATES.Unselected &&
-                      !isAdequate
-                        ? 0.2
-                        : 0,
-                  }}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className={cn(isAdequate && "mt-3")}
-                >
-                  <Button
-                    className="w-full"
-                    type="button"
-                    onClick={() =>
-                      toastManager.add({
-                        title: "Action triggered",
-                        description: "This is an example :)",
-                      })
-                    }
-                  >
-                    Submit
-                  </Button>
-                </motion.div>
-              )}
+              </div>
             </div>
           </AnimatedHeight>
         </CardPanel>

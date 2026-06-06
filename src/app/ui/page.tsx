@@ -23,7 +23,7 @@ export default function UI() {
                 <PricingCard />
               </div>
               <Frame className="hidden w-full sm:block">
-                <FramePanel className="flex min-h-125 items-center justify-center p-6 sm:p-8 md:p-10">
+                <FramePanel className="flex min-h-130 items-center justify-center p-6 sm:p-8 md:p-10">
                   <PricingCard />
                 </FramePanel>
               </Frame>
@@ -36,7 +36,7 @@ export default function UI() {
               </p>
             </div>
             <div className="w-full">
-              <div className="flex justify-center sm:hidden">
+              <div className="flex justify-center sm:hidden min-h-80">
                 <DynamicForm />
               </div>
               <Frame className="hidden w-full sm:block">
