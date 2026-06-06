@@ -192,7 +192,7 @@ export const PricingCard = () => {
               <motion.div layout className="flex flex-col gap-4">
                 <div className="border-t border-border" />
                 <Button
-                  className="relative w-full self-end gap-0 overflow-hidden transition-all active:scale-[.99]"
+                  className="relative w-full self-end gap-0 overflow-hidden"
                   type="button"
                   onClick={() =>
                     toastManager.add({
