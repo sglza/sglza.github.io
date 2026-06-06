@@ -15,28 +15,28 @@ import { Card, CardPanel } from "./ui/card";
 import { toastManager } from "./ui/toast";
 import { AnimatedHeight } from "./animated-height";
 
-const PLAN_AMOUNTS = [1, 10, 30, 100];
-const PLAN_PRICES = [5, 25, 75, 0];
+const PLANS = [
+  { amount: "10", numericAmount: 10, price: 25 },
+  { amount: "30", numericAmount: 30, price: 64 },
+  { amount: "50", numericAmount: 50, price: 94 },
+  { amount: "∞", numericAmount: null, price: null },
+] as const;
 
 export const PricingCard = () => {
   const [planIndex, setPlanIndex] = useState(0);
 
-  const planAmount = PLAN_AMOUNTS[planIndex];
-  const planPrice = PLAN_PRICES[planIndex];
-  const supposedPlanPrice = planAmount * PLAN_PRICES[0];
+  const plan = PLANS[planIndex];
+  const planAmount = plan.amount;
+  const planPrice = plan.price;
+  const baseUnitPrice = PLANS[0].price / PLANS[0].numericAmount;
+  const supposedPlanPrice =
+    plan.numericAmount === null ? null : plan.numericAmount * baseUnitPrice;
+  const isCustomPlan = plan.numericAmount === null;
 
-  const actionCopy = (() => {
-    if (planIndex === 0) {
-      return "Buy";
-    }
-    if (planIndex === PLAN_AMOUNTS.length - 1) {
-      return "Contact us";
-    }
-    return "Subscribe";
-  })();
+  const actionCopy = isCustomPlan ? "Contact us" : "Subscribe";
 
   const handleChangePlan = (newValue: number) => {
-    if (newValue < 0 || newValue >= PLAN_AMOUNTS.length) return;
+    if (newValue < 0 || newValue >= PLANS.length) return;
     setPlanIndex(newValue);
   };
 
@@ -58,21 +58,21 @@ export const PricingCard = () => {
                     <span className="text-[2rem] font-bold">
                       <AnimatePresence mode="popLayout" initial={false}>
                         <motion.span
-                          key={planPrice > 0 ? "price" : "customize"}
+                          key={isCustomPlan ? "custom" : "price"}
                           initial={{ opacity: 0, filter: "blur(4px)" }}
                           animate={{ opacity: 1, filter: "blur(0)" }}
                           exit={{ opacity: 0, filter: "blur(4px)" }}
                           transition={{ type: "spring", duration: 0.5 }}
                         >
-                          {planPrice > 0 ? (
-                            <NumberFlow prefix="$" value={planPrice} />
+                          {planPrice === null ? (
+                            "Enterprise"
                           ) : (
-                            "Custom plan"
+                            <NumberFlow prefix="$" value={planPrice} />
                           )}
                         </motion.span>
                       </AnimatePresence>
                     </span>
-                    {planIndex < PLAN_AMOUNTS.length - 1 && (
+                    {!isCustomPlan && (
                       <motion.span
                         layout
                         transition={{ type: "spring", bounce: 0.2 }}
@@ -83,69 +83,69 @@ export const PricingCard = () => {
                     )}
                   </div>
                   <AnimatePresence mode="popLayout" initial={false}>
-                    {planIndex > 0 && planIndex < PLAN_AMOUNTS.length - 1 && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{
-                          opacity: 1,
-                          y: 0,
-                          transition: { delay: 0.3 },
-                        }}
-                        exit={{
-                          opacity: 0,
-                          y: -10,
-                          transition: { duration: 0.1 },
-                        }}
-                        className="flex items-center gap-1"
-                      >
-                        <p className="text-s line-through">
-                          <AnimatePresence mode="popLayout" initial={false}>
-                            <motion.span
-                              key={supposedPlanPrice}
-                              initial={{ opacity: 1, filter: "blur(2px)" }}
-                              animate={{ opacity: 1, filter: "blur(0)" }}
-                              exit={{
-                                opacity: 0,
-                                filter: "blur(2px)",
-                                transition: { duration: 0.2 },
-                              }}
-                              transition={{ type: "tween", duration: 0.7 }}
-                              className="overflow-hidden"
-                            >
-                              $ {supposedPlanPrice}
-                            </motion.span>
-                          </AnimatePresence>
-                        </p>
-                        <motion.span
-                          layout
-                          transition={{ type: "spring", bounce: 0.2 }}
-                          className="text-xs"
+                    {planIndex > 0 &&
+                      !isCustomPlan &&
+                      supposedPlanPrice !== null && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{
+                            opacity: 1,
+                            y: 0,
+                            transition: { delay: 0.3 },
+                          }}
+                          exit={{
+                            opacity: 0,
+                            y: -10,
+                            transition: { duration: 0.1 },
+                          }}
+                          className="flex items-center gap-1"
                         >
-                          USD
-                        </motion.span>
-                        <motion.p layout>
-                          <Badge variant="success">
-                            {(
-                              (1 - planPrice / supposedPlanPrice) *
-                              100
-                            ).toFixed(0)}
-                            % OFF
-                          </Badge>
-                        </motion.p>
-                      </motion.div>
-                    )}
+                          <p className="text-s line-through">
+                            <AnimatePresence mode="popLayout" initial={false}>
+                              <motion.span
+                                key={supposedPlanPrice}
+                                initial={{ opacity: 0, filter: "blur(4px)" }}
+                                animate={{ opacity: 1, filter: "blur(0)" }}
+                                exit={{
+                                  opacity: 0,
+                                  filter: "blur(4px)",
+                                }}
+                                transition={{ type: "spring", duration: 0.5 }}
+                                className="overflow-hidden"
+                              >
+                                $ {supposedPlanPrice}
+                              </motion.span>
+                            </AnimatePresence>
+                          </p>
+                          <motion.span
+                            layout
+                            transition={{ type: "spring", bounce: 0.2 }}
+                            className="text-xs"
+                          >
+                            USD
+                          </motion.span>
+                          <motion.p layout>
+                            <Badge variant="success">
+                              {(
+                                (1 -
+                                  (planPrice ?? 0) / (supposedPlanPrice ?? 0)) *
+                                100
+                              ).toFixed(0)}
+                              % OFF
+                            </Badge>
+                          </motion.p>
+                        </motion.div>
+                      )}
                   </AnimatePresence>
                   <motion.p layout className="text-muted-foreground text-xs">
-                    {planIndex === 0 ? "Pay once" : "Billed monthly"}
+                    Billed monthly
                   </motion.p>
                 </div>
                 <motion.div layout className="flex flex-col gap-3">
-                  <p className="font-bold text-xs uppercase">
-                    Fully detailed report
-                  </p>
+                  <p className="font-bold text-xs uppercase">Credit bundles</p>
                   <p className="text-muted-foreground text-sm">
-                    Ideal for users who require key data for a more detailed
-                    analysis.
+                    Choose a monthly credit bundle for your team, or move to
+                    unlimited with a custom plan.
                   </p>
                 </motion.div>
                 <motion.div
@@ -153,7 +153,7 @@ export const PricingCard = () => {
                   className="flex items-center justify-between text-primary"
                 >
                   <p className="text-sm">Amount</p>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-1">
                     <Button
                       className="w-9 rounded-full active:scale-95"
                       size="icon"
@@ -172,7 +172,7 @@ export const PricingCard = () => {
                       size="icon"
                       type="button"
                       onClick={() => handleChangePlan(planIndex + 1)}
-                      disabled={planIndex === PLAN_AMOUNTS.length - 1}
+                      disabled={planIndex === PLANS.length - 1}
                       aria-label="Increase amount"
                     >
                       <MdOutlineAdd aria-hidden="true" />
