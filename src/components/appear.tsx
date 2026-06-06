@@ -10,7 +10,7 @@ export const Appear = ({ children }: PropsWithChildren) => {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0 }}
+      initial={{ opacity: 1 }}
       animate={isInView && { opacity: 1 }}
       transition={{ duration: 1, delay: 0.2 }}
     >

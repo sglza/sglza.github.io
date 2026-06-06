@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Toaster } from "sonner";
+import { Geist } from "next/font/google";
 
-import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { AnchoredToastProvider, ToastProvider } from "@/components/ui/toast";
 import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
@@ -26,12 +22,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={cn(geistSans.variable, geistMono.variable, "antialiased")}
-      >
-        {children}
-        <Toaster />
+    <html suppressHydrationWarning lang="en" className="theme">
+      <body className={`${geistSans.className} relative isolate antialiased`}>
+        <ThemeProvider>
+          <ToastProvider>
+            <AnchoredToastProvider>
+              <ThemeToggle />
+              {children}
+            </AnchoredToastProvider>
+          </ToastProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
