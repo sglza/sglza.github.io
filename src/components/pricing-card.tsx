@@ -48,7 +48,7 @@ export const PricingCard = () => {
             <div className="relative flex flex-col gap-3">
               <div className="flex items-center gap-2">
                 <h3 className="text-xl font-extrabold text-primary">
-                  Advanced
+                  Pro plan
                 </h3>
               </div>
               <div className="border-t border-border" />
@@ -141,25 +141,26 @@ export const PricingCard = () => {
                     Billed monthly
                   </motion.p>
                 </div>
+
                 <motion.div layout className="flex flex-col gap-3">
-                  <p className="font-bold text-xs uppercase">Credit bundles</p>
-                  <p className="text-muted-foreground text-sm">
-                    Choose a monthly credit bundle for your team, or move to
-                    unlimited with a custom plan.
+                  <p className="text-muted-foreground text-sm text-pretty">
+                    Choose a monthly credit bundle that suits your needs, or
+                    move to a custom plan.
                   </p>
                 </motion.div>
+
                 <motion.div
                   layout
                   className="flex items-center justify-between text-primary"
                 >
-                  <p className="text-sm">Amount</p>
+                  <p className="text-sm">Monthly credits</p>
                   <div className="flex items-center gap-1">
                     <Button
-                      className="w-9 rounded-full active:scale-95"
                       size="icon"
                       type="button"
                       onClick={() => handleChangePlan(planIndex - 1)}
                       disabled={planIndex === 0}
+                      variant="outline"
                       aria-label="Decrease amount"
                     >
                       <MdOutlineRemove aria-hidden="true" />
@@ -168,12 +169,12 @@ export const PricingCard = () => {
                       {planAmount}
                     </div>
                     <Button
-                      className="w-9 rounded-full active:scale-95"
                       size="icon"
                       type="button"
                       onClick={() => handleChangePlan(planIndex + 1)}
                       disabled={planIndex === PLANS.length - 1}
                       aria-label="Increase amount"
+                      variant="outline"
                     >
                       <MdOutlineAdd aria-hidden="true" />
                     </Button>
@@ -223,17 +224,14 @@ export const PricingCard = () => {
         </CardPanel>
       </Card>
       <AnimatePresence>
-        {planIndex > 0 && (
+        {planIndex === 1 && (
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.1 } }}
             className="absolute right-4 -top-3"
           >
-            <Badge>
-              <MdOutlineDiamond aria-hidden="true" />
-              Recommended
-            </Badge>
+            <Badge variant="info">Most popular</Badge>
           </motion.div>
         )}
       </AnimatePresence>
