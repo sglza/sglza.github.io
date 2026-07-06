@@ -9,6 +9,7 @@ import {
   TargetAndTransition,
   VariantLabels,
 } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const TRANSITION = {
   type: "tween",
@@ -20,6 +21,7 @@ interface TextTransitionProps {
   initial?: boolean | Target | VariantLabels;
   animate?: boolean | VariantLabels | AnimationControls | TargetAndTransition;
   delay?: number;
+  className?: string;
 }
 
 export const TextTransition = ({
@@ -27,9 +29,10 @@ export const TextTransition = ({
   initial = { opacity: 0, width: 0 },
   animate = { opacity: 1, width: "auto" },
   delay = 0,
+  className,
 }: PropsWithChildren<TextTransitionProps>) => {
   return (
-    <div className="flex w-fit overflow-hidden">
+    <div className={cn("flex w-fit overflow-hidden", className)}>
       <motion.div
         initial={initial}
         animate={animate}
