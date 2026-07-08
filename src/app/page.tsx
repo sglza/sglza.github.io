@@ -60,32 +60,34 @@ export default function Home() {
               <p className="whitespace-nowrap">¡Hola! I&apos;m Santiago.</p>
             </TextTransition>
             <TextTransition
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               delay={0.5}
+              className="overflow-visible"
             >
               <p>Most people call me Santi.</p>
               <div>
                 <span>I&apos;ve been working as a Frontend Engineer @ </span>
                 <a
                   className="font-bold underline underline-offset-4"
-                  href="https://dd360.mx/"
+                  href="https://monopolio.com.mx/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  DD360
+                  monopolio.com.mx
                 </a>{" "}
                 <span>for the past </span>
-                <span className="inline-flex w-24 max-w-24 overflow-hidden bg-linear-to-l from-background to-foreground bg-clip-text text-transparent">
+                <span className="inline-flex w-24 max-w-24 overflow-hidden bg-linear-to-l from-background to-foreground bg-clip-text text-transparent mr-0.5 tabular-nums">
                   <Age beggining={1699250400000} />
                 </span>{" "}
                 <span>years.</span>
               </div>
             </TextTransition>
             <TextTransition
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               delay={0.5}
+              className="overflow-visible"
             >
               <p>
                 I like to experiment creating beautiful web components, you can
@@ -101,9 +103,10 @@ export default function Home() {
               </p>
             </TextTransition>
             <TextTransition
-              initial={{ opacity: 0, y: 60 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 40, filter: "blur(4px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               delay={0.5}
+              className="overflow-visible"
             >
               <p>
                 I also like to go{" "}
@@ -124,13 +127,13 @@ function HighlightPreviewCard({ highlight }: { highlight: PersonalHighlight }) {
   return (
     <PreviewCard>
       <PreviewCardTrigger
-        className="inline font-medium underline decoration-border underline-offset-4 transition-colors hover:text-foreground/80"
+        className="inline font-medium underline decoration-border underline-offset-4 transition-colors hover:text-foreground/80 cursor-pointer"
         render={<button type="button" />}
       >
         {highlight.trigger}
       </PreviewCardTrigger>
       <PreviewCardPopup className="w-80 flex-col p-2" sideOffset={12}>
-        <div className="relative aspect-4/3 overflow-hidden rounded-md border border-border/70 bg-linear-to-br from-muted/80 via-background to-muted/30">
+        <div className="relative aspect-4/3 overflow-hidden rounded-[calc(var(--radius)-4px)] border border-border/70 bg-linear-to-br from-muted/80 via-background to-muted/30">
           {highlight.secondaryImage ? (
             <div className="grid h-full grid-cols-2 gap-px bg-border/70">
               <div className="relative overflow-hidden">
@@ -140,6 +143,7 @@ function HighlightPreviewCard({ highlight }: { highlight: PersonalHighlight }) {
                   placeholder="blur"
                   src={highlight.image}
                   unoptimized
+                  preload
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/25 via-transparent to-transparent" />
               </div>
@@ -150,6 +154,7 @@ function HighlightPreviewCard({ highlight }: { highlight: PersonalHighlight }) {
                   placeholder="blur"
                   src={highlight.secondaryImage}
                   unoptimized
+                  preload
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/25 via-transparent to-transparent" />
               </div>
@@ -162,12 +167,13 @@ function HighlightPreviewCard({ highlight }: { highlight: PersonalHighlight }) {
                 placeholder="blur"
                 src={highlight.image}
                 unoptimized
+                preload
               />
               <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent" />
             </>
           )}
         </div>
-        <div className="px-2 pt-3 pb-1 text-pretty">
+        <div className="px-2 pt-2 pb-1 text-pretty">
           <p className="text-muted-foreground text-sm">{highlight.caption}</p>
         </div>
       </PreviewCardPopup>
