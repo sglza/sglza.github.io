@@ -3,6 +3,7 @@ import { PageTransition } from "@/components/page-transition";
 import { Frame, FramePanel } from "@/components/ui/frame";
 import { DynamicForm } from "@/components/dynamic-form";
 import { PricingCard } from "@/components/pricing-card";
+import { CoachMark } from "@/components/coach-mark";
 
 export default function UI() {
   return (
@@ -12,6 +13,23 @@ export default function UI() {
         <main className="mx-auto w-full max-w-5xl px-4 pt-8 pb-16 sm:px-8 sm:pt-10 sm:pb-20 lg:px-12">
           <div className="grid w-full grid-cols-1 gap-8 md:gap-y-4 md:grid-cols-[200px,auto] md:gap-x-10">
             <div className="flex flex-col gap-1 md:pt-4">
+              <p className="font-semibold">Popover coach mark</p>
+              <p className="text-sm text-muted-foreground">
+                A multi-step product tour with a dimmed backdrop and a moving
+                spotlight.
+              </p>
+            </div>
+            <div className="w-full">
+              <div className="sm:hidden">
+                <CoachMark />
+              </div>
+              <Frame className="hidden w-full sm:block">
+                <FramePanel className="p-0">
+                  <CoachMark />
+                </FramePanel>
+              </Frame>
+            </div>
+            <div className="flex flex-col gap-1 pt-12">
               <p className="font-semibold">Dynamic pricing card</p>
               <p className="text-sm text-muted-foreground">
                 A plan selector that updates pricing, savings, and CTA copy in
