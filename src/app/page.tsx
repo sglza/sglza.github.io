@@ -1,9 +1,9 @@
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
-import boulderingImage from "../../public/bouldering.jpeg";
-import hikingImage from "../../public/hiking.jpeg";
-import marceImage from "../../public/marce.jpeg";
-import surfingImage from "../../public/surfing.jpeg";
+import boulderingImage from "../../public/bouldering.webp";
+import hikingImage from "../../public/hiking.webp";
+import marceImage from "../../public/marce.webp";
+import surfingImage from "../../public/surfing.webp";
 
 import { Age } from "@/components/age";
 import { PageHeader } from "@/components/page-header";
