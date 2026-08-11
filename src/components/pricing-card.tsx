@@ -43,9 +43,7 @@ export const PricingCard = () => {
           <AnimatedHeight padding="p-6" className="relative h-fit">
             <div className="relative flex flex-col gap-3">
               <div className="flex items-center gap-2">
-                <h3 className="text-xl font-extrabold text-primary">
-                  Pro plan
-                </h3>
+                <h3 className="text-xl font-bold text-primary">Pro plan</h3>
               </div>
               <div className="border-t border-border" />
               <div className="flex flex-col gap-6">

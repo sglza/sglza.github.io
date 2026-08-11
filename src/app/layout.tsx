@@ -25,9 +25,7 @@ export default function RootLayout({
       <body className={`${geistSans.className} relative isolate antialiased`}>
         <ThemeProvider>
           <ToastProvider>
-            <AnchoredToastProvider>
-              {children}
-            </AnchoredToastProvider>
+            <AnchoredToastProvider>{children}</AnchoredToastProvider>
           </ToastProvider>
         </ThemeProvider>
       </body>
