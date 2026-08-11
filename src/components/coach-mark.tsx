@@ -241,7 +241,9 @@ export function CoachMark(): React.ReactElement {
         </Card>
 
         <PopoverSpotlight
+          className="transition-[clip-path,opacity] duration-250 ease-in-out motion-reduce:transition-none"
           halo
+          haloClassName="duration-250 ease-in-out motion-reduce:transition-none"
           padding={step.padding}
           radius={step.radius}
           targetRef={targetRefs[stepIndex]}
@@ -249,7 +251,8 @@ export function CoachMark(): React.ReactElement {
         <PopoverPopup
           align={step.align}
           anchor={targetRefs[stepIndex]}
-          className="w-72"
+          className="w-72 duration-250 ease-in-out motion-reduce:transition-none"
+          positionerClassName="duration-250 ease-in-out motion-reduce:transition-none"
           side={step.side}
           sideOffset={12 + step.padding}
         >
