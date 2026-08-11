@@ -1,14 +1,16 @@
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
-import boulderingImage from "../../public/bouldering.jpeg";
-import hikingImage from "../../public/hiking.jpeg";
-import marceImage from "../../public/marce.jpeg";
-import surfingImage from "../../public/surfing.jpeg";
+import { PencilLineIcon } from "lucide-react";
+import boulderingImage from "../../public/bouldering.webp";
+import hikingImage from "../../public/hiking.webp";
+import marceImage from "../../public/marce.webp";
+import surfingImage from "../../public/surfing.webp";
 
 import { Age } from "@/components/age";
 import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { TextTransition } from "@/components/text-transition";
+import { Badge } from "@/components/ui/badge";
 import {
   PreviewCard,
   PreviewCardPopup,
@@ -54,7 +56,7 @@ export default function Home() {
     <PageTransition>
       <div className="min-h-dvh">
         <PageHeader />
-        <main className="mx-auto flex min-h-[calc(100dvh-5rem)] w-full max-w-5xl items-center px-4 pt-8 pb-16 sm:min-h-[calc(100dvh-6rem)] sm:px-8 sm:pt-10 sm:pb-20 lg:px-12">
+        <main className="mx-auto flex min-h-[calc(100dvh-5rem)] w-full max-w-5xl px-4 pt-8 pb-16 sm:min-h-[calc(100dvh-6rem)] sm:px-8 sm:pt-10 sm:pb-20 lg:px-12">
           <div className="flex w-full flex-col items-start gap-8">
             <TextTransition>
               <p className="whitespace-nowrap">¡Hola! I&apos;m Santiago.</p>
@@ -69,7 +71,7 @@ export default function Home() {
               <div>
                 <span>I&apos;ve been working as a Frontend Engineer @ </span>
                 <a
-                  className="font-bold underline underline-offset-4"
+                  className="font-semibold underline underline-offset-4"
                   href="https://monopolio.com.mx/"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -94,7 +96,7 @@ export default function Home() {
                 check some of them out{" "}
                 <Link
                   href="/ui"
-                  className="font-bold underline underline-offset-4"
+                  className="font-semibold underline underline-offset-4"
                   transitionTypes={["nav-forward"]}
                 >
                   here
@@ -115,6 +117,42 @@ export default function Home() {
                 be with the{" "}
                 <HighlightPreviewCard highlight={personalHighlights[0]} />.
               </p>
+            </TextTransition>
+            <TextTransition
+              initial={{ opacity: 0, y: 50, filter: "blur(4px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              delay={0.5}
+              className="w-full overflow-visible [&>div]:w-full"
+            >
+              <section
+                aria-labelledby="writing-heading"
+                className="w-full pt-4"
+              >
+                <h2 id="writing-heading" className="font-semibold">
+                  Writing
+                </h2>
+                <ul className="mt-3 w-full">
+                  <li className="text-sm -mx-3 flex w-[calc(100%+1.5rem)] items-center justify-between gap-4 rounded-lg px-3 py-2.5 transition-colors duration-150 ease hover:bg-muted/70 motion-reduce:transition-none">
+                    <span>Coachmark</span>
+                    <span className="flex items-center gap-2">
+                      <Badge
+                        aria-label="Writing status: work in progress"
+                        size="sm"
+                        variant="warning"
+                      >
+                        <PencilLineIcon aria-hidden="true" />
+                        WIP
+                      </Badge>
+                      <time
+                        className="text-sm tabular-nums text-muted-foreground"
+                        dateTime="2026"
+                      >
+                        2026
+                      </time>
+                    </span>
+                  </li>
+                </ul>
+              </section>
             </TextTransition>
           </div>
         </main>

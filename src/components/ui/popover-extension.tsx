@@ -191,7 +191,7 @@ export function PopoverSpotlight({
           <div
             aria-hidden="true"
             className={cn(
-              "pointer-events-none fixed z-40 shadow-[inset_0_0_0_1px_--alpha(var(--color-white)/18%),0_0_0_1px_--alpha(var(--color-white)/80%),0_0_0_4px_--alpha(var(--color-white)/14%),0_0_20px_--alpha(var(--color-white)/24%)] transition-[top,left,width,height,border-radius,opacity] duration-200",
+              "pointer-events-none fixed z-40 animate-in fade-in shadow-[inset_0_0_0_1px_--alpha(var(--color-white)/18%),0_0_0_1px_--alpha(var(--color-white)/80%),0_0_0_4px_--alpha(var(--color-white)/14%),0_0_20px_--alpha(var(--color-white)/24%)] transition-[top,left,width,height,border-radius,opacity] duration-200 motion-reduce:animate-none",
               haloClassName,
             )}
             data-slot="popover-spotlight-halo"
