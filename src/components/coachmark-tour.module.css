@@ -1,0 +1,264 @@
+.Backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgb(0 0 0 / 48%);
+}
+
+.Backdrop[data-starting-style],
+.Backdrop[data-ending-style] {
+  opacity: 0;
+}
+
+.Positioner {
+  z-index: 70;
+}
+
+.Popup {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: min(19rem, calc(100vw - 2rem));
+  max-width: calc(100vw - 2rem);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  background: var(--popover);
+  color: var(--popover-foreground);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 14%);
+  transform-origin: var(--transform-origin);
+}
+
+.Popup.sizeCompact {
+  --coachmark-step-width: min(17rem, calc(100vw - 2rem));
+}
+
+.Popup.sizeMedium {
+  --coachmark-step-width: min(20rem, calc(100vw - 2rem));
+}
+
+.Popup.sizeLarge {
+  --coachmark-step-width: min(23rem, calc(100vw - 2rem));
+}
+
+.Backdrop.transitionFade,
+.Positioner.transitionFade,
+.Popup.transitionFade {
+  transition: opacity 180ms ease-out;
+}
+
+.Backdrop.transitionFade:is(
+    [data-motion-state="entering"],
+    [data-motion-state="exiting"],
+    [data-motion-state="repositioning"]
+  ) {
+  --coachmark-cutout-path: none;
+}
+
+.Positioner.transitionFade:is(
+    [data-motion-state="entering"],
+    [data-motion-state="exiting"],
+    [data-motion-state="repositioning"]
+  ),
+.Popup.transitionFade:is(
+    [data-starting-style],
+    [data-ending-style],
+    [data-motion-state="entering"],
+    [data-motion-state="exiting"],
+    [data-motion-state="repositioning"]
+  ) {
+  opacity: 0;
+}
+
+.Backdrop.transitionMove {
+  transition:
+    clip-path 240ms ease-in-out,
+    opacity 180ms ease-out;
+}
+
+.Positioner.transitionMove {
+  transition:
+    top 240ms ease-in-out,
+    left 240ms ease-in-out,
+    transform 240ms ease-in-out,
+    opacity 180ms ease-out;
+}
+
+.Positioner.transitionMove[data-concealed][data-motion-state="repositioning"] {
+  transition: none;
+}
+
+.Popup.transitionMove {
+  transition:
+    opacity 180ms ease-out,
+    transform 180ms ease-out;
+}
+
+.Popup.transitionMove:is([data-starting-style], [data-ending-style]) {
+  opacity: 0;
+  transform: scale(0.97);
+}
+
+.Positioner.withViewport {
+  width: var(--positioner-width, max-content);
+  height: var(--positioner-height, max-content);
+}
+
+.Popup.withViewport {
+  width: var(--popup-width, var(--coachmark-step-width));
+  height: var(--popup-height, auto);
+  transition:
+    width 240ms ease-in-out,
+    height 240ms ease-in-out,
+    opacity 180ms ease-out,
+    transform 180ms ease-out;
+}
+
+.Viewport {
+  --coachmark-current-x: 0;
+  --coachmark-current-y: 0;
+  --coachmark-previous-x: 0;
+  --coachmark-previous-y: 0;
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  flex: 1;
+  overflow: clip;
+}
+
+.Viewport[data-activation-direction~="right"] {
+  --coachmark-current-x: 0.5rem;
+  --coachmark-previous-x: -0.5rem;
+}
+
+.Viewport[data-activation-direction~="left"] {
+  --coachmark-current-x: -0.5rem;
+  --coachmark-previous-x: 0.5rem;
+}
+
+.Viewport[data-activation-direction~="down"] {
+  --coachmark-current-y: 0.5rem;
+  --coachmark-previous-y: -0.5rem;
+}
+
+.Viewport[data-activation-direction~="up"] {
+  --coachmark-current-y: -0.5rem;
+  --coachmark-previous-y: 0.5rem;
+}
+
+.Viewport > [data-current],
+.Viewport > [data-previous] {
+  width: 100%;
+  transition:
+    opacity 240ms ease-in-out,
+    transform 240ms ease-in-out;
+}
+
+.Viewport > [data-previous] {
+  position: absolute;
+  inset: 0;
+}
+
+.Viewport > [data-current][data-starting-style] {
+  opacity: 0;
+  transform: translate(
+    var(--coachmark-current-x),
+    var(--coachmark-current-y)
+  );
+}
+
+.Viewport > [data-previous][data-ending-style] {
+  opacity: 0;
+  transform: translate(
+    var(--coachmark-previous-x),
+    var(--coachmark-previous-y)
+  );
+}
+
+.Arrow {
+  position: relative;
+  width: 1rem;
+  height: 0.5rem;
+  overflow: hidden;
+}
+
+.Arrow::before {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: calc(0.5rem * 1.414);
+  height: calc(0.5rem * 1.414);
+  border: 1px solid var(--border);
+  border-radius: 1px;
+  background: var(--popover);
+  content: "";
+  transform: translate(-50%, 50%) rotate(45deg);
+}
+
+.Arrow[data-side="top"] {
+  bottom: -0.5rem;
+  transform: rotate(180deg);
+}
+
+.Arrow[data-side="bottom"] {
+  top: -0.5rem;
+}
+
+.Arrow[data-side="left"] {
+  right: -0.75rem;
+  transform: rotate(90deg);
+}
+
+.Arrow[data-side="right"] {
+  left: -0.75rem;
+  transform: rotate(-90deg);
+}
+
+.Content {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.Stepper {
+  color: var(--muted-foreground);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.Title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.Description {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.Actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.Navigation {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .Backdrop,
+  .Positioner,
+  .Popup,
+  .Viewport > [data-current],
+  .Viewport > [data-previous] {
+    transition: none;
+  }
+}

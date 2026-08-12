@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { FaXTwitter } from "react-icons/fa6";
-import { AtSignIcon } from "lucide-react";
-import { ArrowLeftIcon } from "lucide-react";
+import { AtSignIcon, Undo2 } from "lucide-react";
 
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
@@ -28,7 +27,7 @@ export function PageHeader({ backHref, backLabel = "Back" }: PageHeaderProps) {
               size="sm"
               variant="ghost"
             >
-              <ArrowLeftIcon aria-hidden="true" />
+              <Undo2 aria-hidden="true" />
               {backLabel}
             </Button>
           ) : null}
