@@ -1,6 +1,5 @@
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
-import { PencilLineIcon } from "lucide-react";
 import boulderingImage from "../../public/bouldering.webp";
 import hikingImage from "../../public/hiking.webp";
 import marceImage from "../../public/marce.webp";
@@ -132,24 +131,35 @@ export default function Home() {
                   Writing
                 </h2>
                 <ul className="mt-3 w-full">
-                  <li className="text-sm -mx-3 flex w-[calc(100%+1.5rem)] items-center justify-between gap-4 rounded-lg px-3 py-2.5 transition-colors duration-150 ease hover:bg-muted/70 motion-reduce:transition-none">
-                    <span>Coachmark</span>
-                    <span className="flex items-center gap-2">
-                      <Badge
-                        aria-label="Writing status: work in progress"
-                        size="sm"
-                        variant="warning"
-                      >
-                        <PencilLineIcon aria-hidden="true" />
-                        WIP
-                      </Badge>
+                  <li>
+                    <Link
+                      className="text-sm -mx-3 flex w-[calc(100%+1.5rem)] items-center justify-between gap-4 rounded-lg px-3 py-2.5 transition-colors duration-150 ease hover:bg-muted/70 motion-reduce:transition-none"
+                      href="/coachmark"
+                      transitionTypes={["nav-forward"]}
+                    >
+                      <div className="flex flex-col gap-1">
+                        <span className="flex items-center gap-2">
+                          Coachmark
+                          <Badge
+                            aria-label="Writing status: new"
+                            size="sm"
+                            variant="success"
+                          >
+                            New
+                          </Badge>
+                        </span>
+                        <span className="text-sm text-muted-foreground">
+                          A accessible, unstyled React primitive for product
+                          tours, built on top of Base UI.
+                        </span>
+                      </div>
                       <time
                         className="text-sm tabular-nums text-muted-foreground"
                         dateTime="2026"
                       >
                         2026
                       </time>
-                    </span>
+                    </Link>
                   </li>
                 </ul>
               </section>

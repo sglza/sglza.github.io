@@ -9,7 +9,7 @@ export default function UI() {
   return (
     <PageTransition>
       <div className="min-h-dvh">
-        <PageHeader backHref="/" backLabel="Back Home" />
+        <PageHeader backHref="/" backLabel="Home" />
         <main className="mx-auto w-full max-w-5xl px-4 pt-8 pb-16 sm:px-8 sm:pt-10 sm:pb-20 lg:px-12">
           <div className="grid w-full grid-cols-1 gap-8 md:gap-y-4 md:grid-cols-[200px,auto] md:gap-x-10">
             <div className="flex flex-col gap-1 md:pt-4">
