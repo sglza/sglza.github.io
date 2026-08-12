@@ -26,7 +26,7 @@ export function createCoachmarkMarkdown() {
     "Coachmark exposes motion states on the backdrop, positioner, and popup. Use those data attributes to define enter, exit, and step transitions. This example uses opacity.",
     codeBlock("tsx", FADE_SOURCE),
     "## Detached triggers",
-    "This is probably why you're here. This is also the main thing that I was searching for when looking at existing solutions, and it's arguably the main reason I built this on top of Base UI. Each step provides a target ref to the positioner. Coachmark forwards the active target to Base UI's anchor prop, allowing the same popup to smoothly reposition when the step changes.",
+    "This is probably why you're here. This is also the main thing that I was searching for when looking at existing solutions, and it's arguably the main reason why I built this on top of Base UI. Each step provides a target ref to the positioner. Coachmark forwards the active target to Base UI's anchor prop, allowing the same popup to smoothly reposition when the step changes.",
     codeBlock("tsx", MOVE_SOURCE),
     "## Animating the content",
     "`Coachmark.Viewport` extends Base UI's `Popover.Viewport` which allows us to create content transitions between steps. It's only really needed for displaying content transitions.",

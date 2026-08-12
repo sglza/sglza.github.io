@@ -108,6 +108,7 @@
 .Popup.withViewport {
   width: var(--popup-width, var(--coachmark-step-width));
   height: var(--popup-height, auto);
+  padding: 0;
   transition:
     width 240ms ease-in-out,
     height 240ms ease-in-out,
@@ -125,6 +126,7 @@
   min-height: 0;
   flex: 1;
   overflow: clip;
+  padding: 1rem;
 }
 
 .Viewport[data-activation-direction~="right"] {
@@ -158,6 +160,7 @@
 .Viewport > [data-previous] {
   position: absolute;
   inset: 0;
+  padding: 1rem;
 }
 
 .Viewport > [data-current][data-starting-style] {

@@ -320,8 +320,8 @@ export function CoachmarkDocs() {
               <p className="mt-4 max-w-2xl text-pretty leading-7 text-muted-foreground">
                 This is probably why you&apos;re here. This is also the main
                 thing that I was searching for when looking at existing
-                solutions, and it&apos;s arguably the main reason I built this
-                on top of Base UI. Each step provides a target ref to the
+                solutions, and it&apos;s arguably the main reason why I built
+                this on top of Base UI. Each step provides a target ref to the
                 positioner. Coachmark forwards the active target to Base
                 UI&apos;s anchor prop, allowing the same popup to smoothly
                 reposition when the step changes.
@@ -1300,14 +1300,14 @@ function getPopupClass(
   }
 
   return cn(
-    "relative box-border flex max-w-[calc(100vw-2rem)] origin-(--transform-origin) flex-col rounded-xl border bg-popover p-4 text-popover-foreground shadow-xl motion-reduce:transition-none",
+    "relative box-border flex max-w-[calc(100vw-2rem)] origin-(--transform-origin) flex-col rounded-xl border bg-popover text-popover-foreground shadow-xl motion-reduce:transition-none",
     size === "compact" &&
       "[--coachmark-step-width:min(17rem,calc(100vw-2rem))]",
     size === "medium" && "[--coachmark-step-width:min(20rem,calc(100vw-2rem))]",
     size === "large" && "[--coachmark-step-width:min(23rem,calc(100vw-2rem))]",
     viewport
       ? "h-(--popup-height,auto) w-(--popup-width,var(--coachmark-step-width))"
-      : "w-[min(19rem,calc(100vw-2rem))]",
+      : "w-[min(19rem,calc(100vw-2rem))] p-4",
     motion === "fade" &&
       "[transition:opacity_180ms_ease-out] data-starting-style:opacity-0 data-ending-style:opacity-0 data-[motion-state=entering]:opacity-0 data-[motion-state=exiting]:opacity-0 data-[motion-state=repositioning]:opacity-0",
     motion === "move" &&
@@ -1321,4 +1321,4 @@ const arrowClassName =
   "relative h-2 w-4 overflow-hidden before:absolute before:bottom-0 before:left-1/2 before:size-[0.707rem] before:rounded-[1px] before:border before:border-border before:bg-popover before:content-[''] before:transform-[translate(-50%,50%)_rotate(45deg)] data-[side=top]:-bottom-2 data-[side=top]:rotate-180 data-[side=bottom]:-top-2 data-[side=left]:-right-3 data-[side=left]:rotate-90 data-[side=right]:-left-3 data-[side=right]:-rotate-90";
 
 const viewportClassName =
-  "relative min-h-0 min-w-0 flex-1 overflow-clip [--coachmark-current-x:0] [--coachmark-current-y:0] [--coachmark-previous-x:0] [--coachmark-previous-y:0] data-[activation-direction~=right]:[--coachmark-current-x:0.5rem] data-[activation-direction~=right]:[--coachmark-previous-x:-0.5rem] data-[activation-direction~=left]:[--coachmark-current-x:-0.5rem] data-[activation-direction~=left]:[--coachmark-previous-x:0.5rem] data-[activation-direction~=down]:[--coachmark-current-y:0.5rem] data-[activation-direction~=down]:[--coachmark-previous-y:-0.5rem] data-[activation-direction~=up]:[--coachmark-current-y:-0.5rem] data-[activation-direction~=up]:[--coachmark-previous-y:0.5rem] *:data-current:w-full *:data-previous:absolute *:data-previous:inset-0 *:data-current:[transition:opacity_240ms_ease-in-out,transform_240ms_ease-in-out] *:data-previous:[transition:opacity_240ms_ease-in-out,transform_240ms_ease-in-out] [&>[data-current][data-starting-style]]:transform-[translate(var(--coachmark-current-x),var(--coachmark-current-y))] [&>[data-current][data-starting-style]]:opacity-0 [&>[data-previous][data-ending-style]]:transform-[translate(var(--coachmark-previous-x),var(--coachmark-previous-y))] [&>[data-previous][data-ending-style]]:opacity-0 motion-reduce:*:data-current:transition-none motion-reduce:*:data-previous:transition-none";
+  "relative min-h-0 min-w-0 flex-1 overflow-clip p-4 [--coachmark-current-x:0] [--coachmark-current-y:0] [--coachmark-previous-x:0] [--coachmark-previous-y:0] data-[activation-direction~=right]:[--coachmark-current-x:0.5rem] data-[activation-direction~=right]:[--coachmark-previous-x:-0.5rem] data-[activation-direction~=left]:[--coachmark-current-x:-0.5rem] data-[activation-direction~=left]:[--coachmark-previous-x:0.5rem] data-[activation-direction~=down]:[--coachmark-current-y:0.5rem] data-[activation-direction~=down]:[--coachmark-previous-y:-0.5rem] data-[activation-direction~=up]:[--coachmark-current-y:-0.5rem] data-[activation-direction~=up]:[--coachmark-previous-y:0.5rem] *:data-current:w-full *:data-previous:absolute *:data-previous:inset-0 *:data-previous:p-4 *:data-current:[transition:opacity_240ms_ease-in-out,transform_240ms_ease-in-out] *:data-previous:[transition:opacity_240ms_ease-in-out,transform_240ms_ease-in-out] [&>[data-current][data-starting-style]]:transform-[translate(var(--coachmark-current-x),var(--coachmark-current-y))] [&>[data-current][data-starting-style]]:opacity-0 [&>[data-previous][data-ending-style]]:transform-[translate(var(--coachmark-previous-x),var(--coachmark-previous-y))] [&>[data-previous][data-ending-style]]:opacity-0 motion-reduce:*:data-current:transition-none motion-reduce:*:data-previous:transition-none";

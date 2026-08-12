@@ -71,13 +71,13 @@ const tailwindBase = {
   description: "text-sm leading-5 text-muted-foreground",
   navigation: "flex items-center gap-1",
   popup:
-    "relative box-border flex w-[min(19rem,calc(100vw-2rem))] max-w-[calc(100vw-2rem)] origin-(--transform-origin) flex-col rounded-xl border bg-popover p-4 text-popover-foreground shadow-xl motion-reduce:transition-none",
+    "relative box-border flex w-[min(19rem,calc(100vw-2rem))] max-w-[calc(100vw-2rem)] origin-(--transform-origin) flex-col rounded-xl border bg-popover text-popover-foreground shadow-xl motion-reduce:transition-none",
   positioner: "z-70 motion-reduce:transition-none",
   stepper:
     "text-[0.68rem] font-semibold tracking-[0.12em] text-muted-foreground uppercase",
   title: "text-base font-semibold",
   viewport:
-    "relative min-h-0 min-w-0 flex-1 overflow-clip [--coachmark-current-x:0] [--coachmark-current-y:0] [--coachmark-previous-x:0] [--coachmark-previous-y:0] data-[activation-direction~=right]:[--coachmark-current-x:0.5rem] data-[activation-direction~=right]:[--coachmark-previous-x:-0.5rem] data-[activation-direction~=left]:[--coachmark-current-x:-0.5rem] data-[activation-direction~=left]:[--coachmark-previous-x:0.5rem] data-[activation-direction~=down]:[--coachmark-current-y:0.5rem] data-[activation-direction~=down]:[--coachmark-previous-y:-0.5rem] data-[activation-direction~=up]:[--coachmark-current-y:-0.5rem] data-[activation-direction~=up]:[--coachmark-previous-y:0.5rem] [&>[data-current]]:w-full [&>[data-previous]]:absolute [&>[data-previous]]:inset-0 [&>[data-current]]:[transition:opacity_240ms_ease-in-out,transform_240ms_ease-in-out] [&>[data-previous]]:[transition:opacity_240ms_ease-in-out,transform_240ms_ease-in-out] [&>[data-current][data-starting-style]]:[transform:translate(var(--coachmark-current-x),var(--coachmark-current-y))] [&>[data-current][data-starting-style]]:opacity-0 [&>[data-previous][data-ending-style]]:[transform:translate(var(--coachmark-previous-x),var(--coachmark-previous-y))] [&>[data-previous][data-ending-style]]:opacity-0 motion-reduce:[&>[data-current]]:transition-none motion-reduce:[&>[data-previous]]:transition-none",
+    "relative min-h-0 min-w-0 flex-1 overflow-clip p-4 [--coachmark-current-x:0] [--coachmark-current-y:0] [--coachmark-previous-x:0] [--coachmark-previous-y:0] data-[activation-direction~=right]:[--coachmark-current-x:0.5rem] data-[activation-direction~=right]:[--coachmark-previous-x:-0.5rem] data-[activation-direction~=left]:[--coachmark-current-x:-0.5rem] data-[activation-direction~=left]:[--coachmark-previous-x:0.5rem] data-[activation-direction~=down]:[--coachmark-current-y:0.5rem] data-[activation-direction~=down]:[--coachmark-previous-y:-0.5rem] data-[activation-direction~=up]:[--coachmark-current-y:-0.5rem] data-[activation-direction~=up]:[--coachmark-previous-y:0.5rem] [&>[data-current]]:w-full [&>[data-previous]]:absolute [&>[data-previous]]:inset-0 [&>[data-previous]]:p-4 [&>[data-current]]:[transition:opacity_240ms_ease-in-out,transform_240ms_ease-in-out] [&>[data-previous]]:[transition:opacity_240ms_ease-in-out,transform_240ms_ease-in-out] [&>[data-current][data-starting-style]]:[transform:translate(var(--coachmark-current-x),var(--coachmark-current-y))] [&>[data-current][data-starting-style]]:opacity-0 [&>[data-previous][data-ending-style]]:[transform:translate(var(--coachmark-previous-x),var(--coachmark-previous-y))] [&>[data-previous][data-ending-style]]:opacity-0 motion-reduce:[&>[data-current]]:transition-none motion-reduce:[&>[data-previous]]:transition-none",
 } as const;
 
 const tailwindTransitions = {
@@ -144,6 +144,7 @@ function getPreviewClassNames(
     navigation: tailwindBase.navigation,
     popup: joinClasses(
       tailwindBase.popup,
+      !viewportEnabled && "p-4",
       popupTransition,
       viewportEnabled &&
         "h-[var(--popup-height,auto)] w-[var(--popup-width,var(--coachmark-step-width))]",
@@ -598,6 +599,7 @@ export const CSS_MODULE_SOURCE = `.Backdrop {
 .Popup.withViewport {
   width: var(--popup-width, var(--coachmark-step-width));
   height: var(--popup-height, auto);
+  padding: 0;
   transition:
     width 240ms ease-in-out,
     height 240ms ease-in-out,
@@ -615,6 +617,7 @@ export const CSS_MODULE_SOURCE = `.Backdrop {
   min-height: 0;
   flex: 1;
   overflow: clip;
+  padding: 1rem;
 }
 
 .Viewport[data-activation-direction~="right"] {
@@ -648,6 +651,7 @@ export const CSS_MODULE_SOURCE = `.Backdrop {
 .Viewport > [data-previous] {
   position: absolute;
   inset: 0;
+  padding: 1rem;
 }
 
 .Viewport > [data-current][data-starting-style] {
