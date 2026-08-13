@@ -6,6 +6,7 @@ import marceImage from "../../public/marce.webp";
 import surfingImage from "../../public/surfing.webp";
 
 import { Age } from "@/components/age";
+import { LocalFooter } from "@/components/local-footer";
 import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { TextTransition } from "@/components/text-transition";
@@ -53,9 +54,9 @@ const personalHighlights: readonly PersonalHighlight[] = [
 export default function Home() {
   return (
     <PageTransition>
-      <div className="min-h-dvh">
+      <div className="flex min-h-dvh flex-col">
         <PageHeader />
-        <main className="mx-auto flex min-h-[calc(100dvh-5rem)] w-full max-w-5xl px-4 pt-8 pb-16 sm:min-h-[calc(100dvh-6rem)] sm:px-8 sm:pt-10 sm:pb-20 lg:px-12">
+        <main className="mx-auto flex w-full max-w-5xl flex-1 px-4 pt-8 pb-12 sm:px-8 sm:pt-10 sm:pb-16 lg:px-12">
           <div className="flex w-full flex-col items-start gap-8">
             <TextTransition>
               <p className="whitespace-nowrap">¡Hola! I&apos;m Santiago.</p>
@@ -149,7 +150,7 @@ export default function Home() {
                           </Badge>
                         </span>
                         <span className="text-sm text-muted-foreground">
-                          A accessible, unstyled React primitive for product
+                          An accessible, unstyled React primitive for product
                           tours, built on top of Base UI.
                         </span>
                       </div>
@@ -166,6 +167,7 @@ export default function Home() {
             </TextTransition>
           </div>
         </main>
+        <LocalFooter />
       </div>
     </PageTransition>
   );

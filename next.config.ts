@@ -5,7 +5,6 @@ const nextConfig: NextConfig = {
     viewTransition: true,
   },
   output: "export",
-  trailingSlash: true,
   turbopack: {
     root: process.cwd(),
   },
