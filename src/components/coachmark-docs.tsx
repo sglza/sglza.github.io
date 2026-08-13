@@ -1002,7 +1002,11 @@ function TourContent({
       >
         {({ stepCount, stepIndex }) => `Step ${stepIndex + 1} of ${stepCount}`}
       </Coachmark.Stepper>
-      <div className="grid gap-1.5">
+      <div
+        className={
+          stylingMode === "css-modules" ? tourStyles.Body : "grid gap-1.5"
+        }
+      >
         <Coachmark.Title
           className={
             stylingMode === "css-modules"
@@ -1022,6 +1026,33 @@ function TourContent({
           {description}
         </Coachmark.Description>
       </div>
+      {viewport ? null : (
+        <div
+          className={
+            stylingMode === "css-modules"
+              ? tourStyles.Actions
+              : "mt-1 flex items-center justify-between gap-3"
+          }
+        >
+          <Coachmark.Close render={<Button size="sm" variant="ghost" />}>
+            Skip
+          </Coachmark.Close>
+          <div
+            className={
+              stylingMode === "css-modules"
+                ? tourStyles.Navigation
+                : "flex items-center gap-1"
+            }
+          >
+            <Coachmark.Previous render={<Button size="sm" variant="ghost" />}>
+              Back
+            </Coachmark.Previous>
+            <Coachmark.Next render={<Button size="sm" />}>
+              {({ isLastStep }) => (isLastStep ? "Finish" : "Next")}
+            </Coachmark.Next>
+          </div>
+        </div>
+      )}
     </div>
   );
 
@@ -1047,31 +1078,33 @@ function TourContent({
       ) : (
         content
       )}
-      <div
-        className={
-          stylingMode === "css-modules"
-            ? tourStyles.Actions
-            : "mt-1 flex items-center justify-between gap-3 p-4 pt-0"
-        }
-      >
-        <Coachmark.Close render={<Button size="sm" variant="ghost" />}>
-          Skip
-        </Coachmark.Close>
+      {viewport ? (
         <div
           className={
             stylingMode === "css-modules"
-              ? tourStyles.Navigation
-              : "flex items-center gap-1"
+              ? cn(tourStyles.Actions, tourStyles.ViewportActions)
+              : "flex items-center justify-between gap-3 p-4 pt-0"
           }
         >
-          <Coachmark.Previous render={<Button size="sm" variant="ghost" />}>
-            Back
-          </Coachmark.Previous>
-          <Coachmark.Next render={<Button size="sm" />}>
-            {({ isLastStep }) => (isLastStep ? "Finish" : "Next")}
-          </Coachmark.Next>
+          <Coachmark.Close render={<Button size="sm" variant="ghost" />}>
+            Skip
+          </Coachmark.Close>
+          <div
+            className={
+              stylingMode === "css-modules"
+                ? tourStyles.Navigation
+                : "flex items-center gap-1"
+            }
+          >
+            <Coachmark.Previous render={<Button size="sm" variant="ghost" />}>
+              Back
+            </Coachmark.Previous>
+            <Coachmark.Next render={<Button size="sm" />}>
+              {({ isLastStep }) => (isLastStep ? "Finish" : "Next")}
+            </Coachmark.Next>
+          </div>
         </div>
-      </div>
+      ) : null}
     </>
   );
 }
@@ -1321,4 +1354,4 @@ const arrowClassName =
   "relative h-2 w-4 overflow-hidden before:absolute before:bottom-0 before:left-1/2 before:size-[0.707rem] before:rounded-[1px] before:border before:border-border before:bg-popover before:content-[''] before:transform-[translate(-50%,50%)_rotate(45deg)] data-[side=top]:-bottom-2 data-[side=top]:rotate-180 data-[side=bottom]:-top-2 data-[side=left]:-right-3 data-[side=left]:rotate-90 data-[side=right]:-left-3 data-[side=right]:-rotate-90";
 
 const viewportClassName =
-  "relative min-h-0 min-w-0 flex-1 overflow-clip p-4 [--coachmark-current-x:0] [--coachmark-current-y:0] [--coachmark-previous-x:0] [--coachmark-previous-y:0] data-[activation-direction~=right]:[--coachmark-current-x:0.5rem] data-[activation-direction~=right]:[--coachmark-previous-x:-0.5rem] data-[activation-direction~=left]:[--coachmark-current-x:-0.5rem] data-[activation-direction~=left]:[--coachmark-previous-x:0.5rem] data-[activation-direction~=down]:[--coachmark-current-y:2.5rem] data-[activation-direction~=down]:[--coachmark-previous-y:-2.5rem] data-[activation-direction~=up]:[--coachmark-current-y:-2.5rem] data-[activation-direction~=up]:[--coachmark-previous-y:2.5rem] *:data-current:w-full *:data-previous:absolute *:data-previous:inset-0 *:data-previous:p-4 *:data-current:[transition:opacity_240ms_ease-in-out,transform_240ms_ease-in-out] *:data-previous:[transition:opacity_240ms_ease-in-out,transform_240ms_ease-in-out] [&>[data-current][data-starting-style]]:transform-[translate(var(--coachmark-current-x),var(--coachmark-current-y))] [&>[data-current][data-starting-style]]:opacity-0 [&>[data-previous][data-ending-style]]:transform-[translate(var(--coachmark-previous-x),var(--coachmark-previous-y))] [&>[data-previous][data-ending-style]]:opacity-0 motion-reduce:*:data-current:transition-none motion-reduce:*:data-previous:transition-none";
+  "relative min-h-0 min-w-0 flex-1 overflow-clip p-4 [--coachmark-current-x:0] [--coachmark-current-y:0] [--coachmark-previous-x:0] [--coachmark-previous-y:0] data-[activation-direction~=right]:[--coachmark-current-x:0.5rem] data-[activation-direction~=right]:[--coachmark-previous-x:-0.5rem] data-[activation-direction~=left]:[--coachmark-current-x:-0.5rem] data-[activation-direction~=left]:[--coachmark-previous-x:0.5rem] data-[activation-direction~=down]:[--coachmark-current-y:0.5rem] data-[activation-direction~=down]:[--coachmark-previous-y:-0.5rem] data-[activation-direction~=up]:[--coachmark-current-y:-0.5rem] data-[activation-direction~=up]:[--coachmark-previous-y:0.5rem] *:data-current:w-full *:data-previous:absolute *:data-previous:inset-0 *:data-previous:p-4 *:data-current:[transition:opacity_240ms_ease-in-out,transform_240ms_ease-in-out,filter_240ms_ease-in-out] *:data-previous:[transition:opacity_240ms_ease-in-out,transform_240ms_ease-in-out,filter_240ms_ease-in-out] [&>[data-current][data-starting-style]]:transform-[translate(var(--coachmark-current-x),var(--coachmark-current-y))] [&>[data-current][data-starting-style]]:opacity-0 [&>[data-current][data-starting-style]]:[filter:blur(3px)] [&>[data-previous][data-ending-style]]:transform-[translate(var(--coachmark-previous-x),var(--coachmark-previous-y))] [&>[data-previous][data-ending-style]]:opacity-0 [&>[data-previous][data-ending-style]]:[filter:blur(3px)] motion-reduce:*:data-current:transition-none motion-reduce:*:data-previous:transition-none";

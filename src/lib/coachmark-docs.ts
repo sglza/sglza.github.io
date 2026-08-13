@@ -51,6 +51,7 @@ type PreviewClassNames = {
   actions: string;
   arrow: string;
   backdrop: string;
+  body: string;
   content: string;
   description: string;
   navigation: string;
@@ -67,17 +68,18 @@ const tailwindBase = {
     "relative h-2 w-4 overflow-hidden before:absolute before:bottom-0 before:left-1/2 before:size-[calc(0.5rem*1.414)] before:rounded-[1px] before:border before:border-border before:bg-popover before:content-[''] before:[transform:translate(-50%,50%)_rotate(45deg)] data-[side=top]:-bottom-2 data-[side=top]:rotate-180 data-[side=bottom]:-top-2 data-[side=left]:-right-3 data-[side=left]:rotate-90 data-[side=right]:-left-3 data-[side=right]:-rotate-90",
   backdrop:
     "fixed inset-0 z-60 bg-black/48 data-starting-style:opacity-0 data-ending-style:opacity-0 motion-reduce:transition-none",
+  body: "grid gap-1.5",
   content: "grid gap-3",
   description: "text-sm leading-5 text-muted-foreground",
   navigation: "flex items-center gap-1",
   popup:
-    "relative box-border flex w-[min(19rem,calc(100vw-2rem))] max-w-[calc(100vw-2rem)] origin-(--transform-origin) flex-col rounded-xl border bg-popover text-popover-foreground shadow-xl motion-reduce:transition-none",
+    "relative box-border flex max-w-[calc(100vw-2rem)] origin-(--transform-origin) flex-col rounded-xl border bg-popover text-popover-foreground shadow-xl motion-reduce:transition-none",
   positioner: "z-70 motion-reduce:transition-none",
   stepper:
     "text-[0.68rem] font-semibold tracking-[0.12em] text-muted-foreground uppercase",
   title: "text-base font-semibold",
   viewport:
-    "relative min-h-0 min-w-0 flex-1 overflow-clip p-4 [--coachmark-current-x:0] [--coachmark-current-y:0] [--coachmark-previous-x:0] [--coachmark-previous-y:0] data-[activation-direction~=right]:[--coachmark-current-x:0.5rem] data-[activation-direction~=right]:[--coachmark-previous-x:-0.5rem] data-[activation-direction~=left]:[--coachmark-current-x:-0.5rem] data-[activation-direction~=left]:[--coachmark-previous-x:0.5rem] data-[activation-direction~=down]:[--coachmark-current-y:0.5rem] data-[activation-direction~=down]:[--coachmark-previous-y:-0.5rem] data-[activation-direction~=up]:[--coachmark-current-y:-0.5rem] data-[activation-direction~=up]:[--coachmark-previous-y:0.5rem] [&>[data-current]]:w-full [&>[data-previous]]:absolute [&>[data-previous]]:inset-0 [&>[data-previous]]:p-4 [&>[data-current]]:[transition:opacity_240ms_ease-in-out,transform_240ms_ease-in-out] [&>[data-previous]]:[transition:opacity_240ms_ease-in-out,transform_240ms_ease-in-out] [&>[data-current][data-starting-style]]:[transform:translate(var(--coachmark-current-x),var(--coachmark-current-y))] [&>[data-current][data-starting-style]]:opacity-0 [&>[data-previous][data-ending-style]]:[transform:translate(var(--coachmark-previous-x),var(--coachmark-previous-y))] [&>[data-previous][data-ending-style]]:opacity-0 motion-reduce:[&>[data-current]]:transition-none motion-reduce:[&>[data-previous]]:transition-none",
+    "relative min-h-0 min-w-0 flex-1 overflow-clip p-4 [--coachmark-current-x:0] [--coachmark-current-y:0] [--coachmark-previous-x:0] [--coachmark-previous-y:0] data-[activation-direction~=right]:[--coachmark-current-x:0.5rem] data-[activation-direction~=right]:[--coachmark-previous-x:-0.5rem] data-[activation-direction~=left]:[--coachmark-current-x:-0.5rem] data-[activation-direction~=left]:[--coachmark-previous-x:0.5rem] data-[activation-direction~=down]:[--coachmark-current-y:0.5rem] data-[activation-direction~=down]:[--coachmark-previous-y:-0.5rem] data-[activation-direction~=up]:[--coachmark-current-y:-0.5rem] data-[activation-direction~=up]:[--coachmark-previous-y:0.5rem] [&>[data-current]]:w-full [&>[data-previous]]:absolute [&>[data-previous]]:inset-0 [&>[data-previous]]:p-4 [&>[data-current]]:[transition:opacity_240ms_ease-in-out,transform_240ms_ease-in-out,filter_240ms_ease-in-out] [&>[data-previous]]:[transition:opacity_240ms_ease-in-out,transform_240ms_ease-in-out,filter_240ms_ease-in-out] [&>[data-current][data-starting-style]]:[transform:translate(var(--coachmark-current-x),var(--coachmark-current-y))] [&>[data-current][data-starting-style]]:opacity-0 [&>[data-current][data-starting-style]]:[filter:blur(3px)] [&>[data-previous][data-ending-style]]:[transform:translate(var(--coachmark-previous-x),var(--coachmark-previous-y))] [&>[data-previous][data-ending-style]]:opacity-0 [&>[data-previous][data-ending-style]]:[filter:blur(3px)] motion-reduce:[&>[data-current]]:transition-none motion-reduce:[&>[data-previous]]:transition-none",
 } as const;
 
 const tailwindTransitions = {
@@ -115,9 +117,10 @@ function getPreviewClassNames(
     const viewport = viewportEnabled ? "withViewport" : "";
 
     return {
-      actions: "Actions",
+      actions: viewportEnabled ? "Actions ViewportActions" : "Actions",
       arrow: "Arrow",
       backdrop: joinClasses("Backdrop", transition),
+      body: "Body",
       content: "Content",
       description: "Description",
       navigation: "Navigation",
@@ -136,15 +139,18 @@ function getPreviewClassNames(
     : transition?.popup;
 
   return {
-    actions: tailwindBase.actions,
+    actions: viewportEnabled
+      ? "flex items-center justify-between gap-3 p-4 pt-0"
+      : tailwindBase.actions,
     arrow: tailwindBase.arrow,
     backdrop: joinClasses(tailwindBase.backdrop, transition?.backdrop),
+    body: tailwindBase.body,
     content: tailwindBase.content,
     description: tailwindBase.description,
     navigation: tailwindBase.navigation,
     popup: joinClasses(
       tailwindBase.popup,
-      !viewportEnabled && "p-4",
+      !viewportEnabled && "w-[min(19rem,calc(100vw-2rem))] p-4",
       popupTransition,
       viewportEnabled &&
         "h-[var(--popup-height,auto)] w-[var(--popup-width,var(--coachmark-step-width))]",
@@ -268,42 +274,33 @@ export function createPlaygroundSource(
     contentLevel + 2,
   );
   writer.line("</Coachmark.Stepper>", contentLevel + 1);
-  writer.line("<Coachmark.Title", contentLevel + 1);
-  writeClassNameProp(writer, classes.title, stylingMode, contentLevel + 2);
-  writer.line(">{step.title}</Coachmark.Title>", contentLevel + 1);
-  writer.line("<Coachmark.Description", contentLevel + 1);
+  writer.line("<div", contentLevel + 1);
+  writeClassNameProp(writer, classes.body, stylingMode, contentLevel + 2);
+  writer.line(">", contentLevel + 1);
+  writer.line("<Coachmark.Title", contentLevel + 2);
+  writeClassNameProp(writer, classes.title, stylingMode, contentLevel + 3);
+  writer.line(">{step.title}</Coachmark.Title>", contentLevel + 2);
+  writer.line("<Coachmark.Description", contentLevel + 2);
   writeClassNameProp(
     writer,
     classes.description,
     stylingMode,
-    contentLevel + 2,
-  );
-  writer.line(">", contentLevel + 1);
-  writer.line("{step.description}", contentLevel + 2);
-  writer.line("</Coachmark.Description>", contentLevel + 1);
-  writer.line("<div", contentLevel + 1);
-  writeClassNameProp(writer, classes.actions, stylingMode, contentLevel + 2);
-  writer.line(">", contentLevel + 1);
-  writer.line("<Coachmark.Close>Skip</Coachmark.Close>", contentLevel + 2);
-  writer.line("<div", contentLevel + 2);
-  writeClassNameProp(writer, classes.navigation, stylingMode, contentLevel + 3);
-  writer.line(">", contentLevel + 2);
-  writer.line(
-    "<Coachmark.Previous>Back</Coachmark.Previous>",
     contentLevel + 3,
   );
-  writer.line("<Coachmark.Next>", contentLevel + 3);
-  writer.line(
-    '{({ isLastStep }) => (isLastStep ? "Finish" : "Next")}',
-    contentLevel + 4,
-  );
-  writer.line("</Coachmark.Next>", contentLevel + 3);
-  writer.line("</div>", contentLevel + 2);
+  writer.line(">", contentLevel + 2);
+  writer.line("{step.description}", contentLevel + 3);
+  writer.line("</Coachmark.Description>", contentLevel + 2);
   writer.line("</div>", contentLevel + 1);
+
+  if (!viewportEnabled) {
+    writeTourActions(writer, classes, stylingMode, contentLevel + 1);
+  }
+
   writer.line("</div>", contentLevel);
 
   if (viewportEnabled) {
     writer.line("</Coachmark.Viewport>", 7);
+    writeTourActions(writer, classes, stylingMode, 7);
   }
 
   writer.line("</Coachmark.Popup>", 6);
@@ -321,6 +318,30 @@ export function createPlaygroundSource(
     DEPLOYMENT_DETAILS_CARD_SOURCE,
     DEPLOYMENT_TOUR_STEPS_SOURCE,
   ].join("\n\n");
+}
+
+function writeTourActions(
+  writer: SourceWriter,
+  classes: PreviewClassNames,
+  stylingMode: StylingMode,
+  level: number,
+) {
+  writer.line("<div", level);
+  writeClassNameProp(writer, classes.actions, stylingMode, level + 1);
+  writer.line(">", level);
+  writer.line("<Coachmark.Close>Skip</Coachmark.Close>", level + 1);
+  writer.line("<div", level + 1);
+  writeClassNameProp(writer, classes.navigation, stylingMode, level + 2);
+  writer.line(">", level + 1);
+  writer.line("<Coachmark.Previous>Back</Coachmark.Previous>", level + 2);
+  writer.line("<Coachmark.Next>", level + 2);
+  writer.line(
+    '{({ isLastStep }) => (isLastStep ? "Finish" : "Next")}',
+    level + 3,
+  );
+  writer.line("</Coachmark.Next>", level + 2);
+  writer.line("</div>", level + 1);
+  writer.line("</div>", level);
 }
 
 const DEPLOYMENT_DETAILS_CARD_SOURCE = `type DeploymentDetailsTargetRefs = {
@@ -645,7 +666,8 @@ export const CSS_MODULE_SOURCE = `.Backdrop {
   width: 100%;
   transition:
     opacity 240ms ease-in-out,
-    transform 240ms ease-in-out;
+    transform 240ms ease-in-out,
+    filter 240ms ease-in-out;
 }
 
 .Viewport > [data-previous] {
@@ -655,6 +677,7 @@ export const CSS_MODULE_SOURCE = `.Backdrop {
 }
 
 .Viewport > [data-current][data-starting-style] {
+  filter: blur(3px);
   opacity: 0;
   transform: translate(
     var(--coachmark-current-x),
@@ -663,6 +686,7 @@ export const CSS_MODULE_SOURCE = `.Backdrop {
 }
 
 .Viewport > [data-previous][data-ending-style] {
+  filter: blur(3px);
   opacity: 0;
   transform: translate(
     var(--coachmark-previous-x),
@@ -714,6 +738,11 @@ export const CSS_MODULE_SOURCE = `.Backdrop {
   gap: 0.75rem;
 }
 
+.Body {
+  display: grid;
+  gap: 0.375rem;
+}
+
 .Stepper {
   color: var(--muted-foreground);
   font-size: 0.68rem;
@@ -739,6 +768,11 @@ export const CSS_MODULE_SOURCE = `.Backdrop {
   justify-content: space-between;
   gap: 0.75rem;
   margin-top: 0.25rem;
+}
+
+.ViewportActions {
+  margin-top: 0;
+  padding: 0 1rem 1rem;
 }
 
 .Navigation {
