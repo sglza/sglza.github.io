@@ -28,7 +28,7 @@ type PersonalHighlight = {
 
 const personalHighlights: readonly PersonalHighlight[] = [
   {
-    caption: "Me and my girlfriend Marce at my best friend's wedding.",
+    caption: "My girlfriend Marce and I at my best friend's wedding.",
     image: marceImage,
     imageAlt: "A personal photo with someone I love.",
     trigger: "people I love",
