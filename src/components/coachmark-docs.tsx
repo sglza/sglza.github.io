@@ -206,10 +206,6 @@ export function CoachmarkDocs() {
                 An accessible, unstyled React primitive for product tours, built
                 on top of Base UI.
               </p>
-              <p className="mt-6 max-w-2xl text-pretty leading-7">
-                When I looked for a way to build product tours, I couldn&apos;t
-                find anything that fit my needs. <br /> So I built Coachmark.
-              </p>
 
               <div className="mt-8 flex flex-wrap gap-2">
                 <Button

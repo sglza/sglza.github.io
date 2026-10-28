@@ -15,7 +15,6 @@ export function createCoachmarkMarkdown() {
   return [
     "# Coachmark",
     "An accessible, unstyled React primitive for product tours, built on top of Base UI.",
-    "When I looked for a way to build product tours, I couldn't find anything that fit my needs.  \nSo I built Coachmark.",
     "[GitHub](https://github.com/sglza/coachmark)",
     "## Getting started",
     "To get started you just need to add Coachmark to your React project.",
