@@ -1,5 +1,7 @@
 "use client";
 
+// Adapted from coss ui (https://coss.com/ui), MIT License,
+// Copyright (c) 2025 coss.com and Origin UI.
 import { Toolbar as ToolbarPrimitive } from "@base-ui/react/toolbar";
 import type React from "react";
 import { cn } from "@/lib/utils";

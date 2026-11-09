@@ -1,5 +1,7 @@
 "use client";
 
+// Adapted from coss ui (https://coss.com/ui), MIT License,
+// Copyright (c) 2025 coss.com and Origin UI.
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import { ChevronRight, MoreHorizontal } from "lucide-react";

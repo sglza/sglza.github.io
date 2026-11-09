@@ -55,7 +55,7 @@ export function CoachmarkCodeViewer(props: CoachmarkCodeViewerProps) {
     <ScrollArea
       aria-label={files.length === 1 ? `${files[0].filename} code` : "Code files"}
       className="min-h-136 max-h-136 rounded-xl border text-code-foreground shadow-xs **:data-[slot=scroll-area-viewport]:max-h-136"
-      containVerticalOverscroll={false}
+        overscrollContain={false}
       role="region"
       scrollFade
     >

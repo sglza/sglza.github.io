@@ -1,5 +1,7 @@
 "use client";
 
+// Adapted from coss ui (https://coss.com/ui), MIT License,
+// Copyright (c) 2025 coss.com and Origin UI.
 import { Progress as ProgressPrimitive } from "@base-ui/react/progress";
 import type React from "react";
 import { cn } from "@/lib/utils";
@@ -11,7 +13,7 @@ export function Progress({
 }: ProgressPrimitive.Root.Props): React.ReactElement {
   return (
     <ProgressPrimitive.Root
-      className={cn("flex w-full flex-col gap-2", className)}
+      className={cn("gap-2 flex w-full flex-col", className)}
       data-slot="progress"
       {...props}
     >
@@ -46,7 +48,7 @@ export function ProgressTrack({
   return (
     <ProgressPrimitive.Track
       className={cn(
-        "block h-1.5 w-full overflow-hidden rounded-full bg-input",
+        "h-1.5 block w-full overflow-hidden rounded-full bg-muted-alpha",
         className,
       )}
       data-slot="progress-track"

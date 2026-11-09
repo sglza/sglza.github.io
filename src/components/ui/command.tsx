@@ -1,5 +1,7 @@
 "use client";
 
+// Adapted from coss ui (https://coss.com/ui), MIT License,
+// Copyright (c) 2025 coss.com and Origin UI.
 import { Dialog as CommandDialogPrimitive } from "@base-ui/react/dialog";
 import { SearchIcon } from "lucide-react";
 import type * as React from "react";
@@ -43,7 +45,7 @@ export function CommandDialogBackdrop({
   return (
     <CommandDialogPrimitive.Backdrop
       className={cn(
-        "fixed inset-0 z-50 bg-black/32 backdrop-blur-sm transition-all duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0",
+        "fixed inset-0 z-50 bg-overlay backdrop-blur-sm transition-all duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute",
         className,
       )}
       data-slot="command-dialog-backdrop"
@@ -82,7 +84,7 @@ export function CommandDialogPopup({
       <CommandDialogViewport>
         <CommandDialogPrimitive.Popup
           className={cn(
-            "relative row-start-2 flex max-h-105 min-h-0 w-full min-w-0 max-w-xl -translate-y-[calc(1.25rem*var(--nested-dialogs))] scale-[calc(1-0.1*var(--nested-dialogs))] flex-col rounded-2xl border bg-popover not-dark:bg-clip-padding text-popover-foreground opacity-[calc(1-0.1*var(--nested-dialogs))] shadow-lg/5 outline-none transition-[scale,opacity,translate] duration-200 ease-in-out will-change-transform before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-2xl)-1px)] before:bg-muted/72 before:shadow-[0_1px_--theme(--color-black/4%)] data-nested:data-ending-style:translate-y-8 data-nested:data-starting-style:translate-y-8 data-nested-dialog-open:origin-top data-ending-style:scale-98 data-starting-style:scale-98 data-ending-style:opacity-0 data-starting-style:opacity-0 **:data-[slot=scroll-area-viewport]:data-has-overflow-y:pe-1 dark:before:shadow-[0_-1px_--theme(--color-white/6%)]",
+            "relative row-start-2 flex max-h-105 min-h-0 w-full min-w-0 max-w-xl -translate-y-[calc(1.25rem*var(--nested-dialogs))] scale-[calc(1-0.1*var(--nested-dialogs))] flex-col rounded-2xl border bg-popover not-dark:bg-clip-padding text-popover-foreground opacity-[calc(1-0.1*var(--nested-dialogs))] shadow-lg/5 outline-none transition-[scale,opacity,translate] duration-200 ease-in-out will-change-transform before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-2xl)-1px)] before:bg-muted before:shadow-[0_1px_--theme(--color-black/4%)] data-nested:data-ending-style:translate-y-8 data-nested:data-starting-style:translate-y-8 data-nested-dialog-open:origin-top data-ending-style:scale-98 data-starting-style:scale-98 data-ending-style:opacity-0 data-starting-style:opacity-0 **:data-[slot=scroll-area-viewport]:data-has-overflow-y:pe-1 dark:before:shadow-[0_-1px_--theme(--color-white/6%)]",
             className,
           )}
           data-slot="command-dialog-popup"
@@ -121,7 +123,7 @@ export function CommandInput({
       <AutocompleteInput
         autoFocus
         className={cn(
-          "border-transparent! bg-transparent! shadow-none before:hidden has-focus-visible:ring-0",
+          "border-transparent! bg-transparent! bg-none shadow-none inset-shadow-none before:hidden has-focus-visible:ring-0",
           className,
         )}
         placeholder={placeholder}
@@ -200,11 +202,7 @@ export function CommandGroupLabel({
   );
 }
 
-export function CommandCollection({
-  ...props
-}: React.ComponentProps<typeof AutocompleteCollection>): React.ReactElement {
-  return <AutocompleteCollection data-slot="command-collection" {...props} />;
-}
+export const CommandCollection = AutocompleteCollection;
 
 export function CommandItem({
   className,
@@ -239,7 +237,7 @@ export function CommandShortcut({
   return (
     <kbd
       className={cn(
-        "ms-auto font-medium font-sans text-muted-foreground/72 text-xs tracking-widest",
+        "ms-auto font-medium font-sans text-muted-foreground text-xs tracking-widest",
         className,
       )}
       data-slot="command-shortcut"
@@ -255,7 +253,7 @@ export function CommandFooter({
   return (
     <div
       className={cn(
-        "flex items-center justify-between gap-2 rounded-b-[calc(var(--radius-2xl)-1px)] border-t px-5 py-3 text-muted-foreground text-xs",
+        "relative flex items-center justify-between gap-2 rounded-b-[calc(var(--radius-2xl)-1px)] border-t px-5 py-3 text-muted-foreground text-xs",
         className,
       )}
       data-slot="command-footer"

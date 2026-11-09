@@ -1,5 +1,7 @@
 "use client";
 
+// Adapted from coss ui (https://coss.com/ui), MIT License,
+// Copyright (c) 2025 coss.com and Origin UI.
 import { mergeProps } from "@base-ui/react/merge-props";
 import { Select as SelectPrimitive } from "@base-ui/react/select";
 import { useRender } from "@base-ui/react/use-render";
@@ -10,12 +12,23 @@ import {
   ChevronUpIcon,
 } from "lucide-react";
 import type * as React from "react";
+import {
+  controlSurfaceClassName,
+  controlPressableClassName,
+  controlDisabledClassName,
+} from "@/lib/control-surface";
 import { cn } from "@/lib/utils";
 
 export const Select: typeof SelectPrimitive.Root = SelectPrimitive.Root;
 
 export const selectTriggerVariants = cva(
-  "relative inline-flex min-h-9 w-full min-w-36 select-none items-center justify-between gap-2 rounded-lg border border-input bg-background not-dark:bg-clip-padding px-[calc(--spacing(3)-1px)] text-left text-base text-foreground shadow-xs/5 outline-none ring-ring/24 transition-shadow before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-lg)-1px)] not-data-disabled:not-focus-visible:not-aria-invalid:not-data-pressed:before:shadow-[0_1px_--theme(--color-black/4%)] pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 focus-visible:border-ring focus-visible:ring-[3px] aria-invalid:border-destructive/36 focus-visible:aria-invalid:border-destructive/64 focus-visible:aria-invalid:ring-destructive/16 data-disabled:pointer-events-none data-disabled:opacity-64 sm:min-h-8 sm:text-sm dark:bg-input/32 dark:aria-invalid:ring-destructive/24 dark:not-data-disabled:not-focus-visible:not-aria-invalid:not-data-pressed:before:shadow-[0_-1px_--theme(--color-white/6%)] [&_svg:not([class*='opacity-'])]:opacity-80 [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0 [[data-disabled],:focus-visible,[aria-invalid],[data-pressed]]:shadow-none",
+  [
+    "relative inline-flex min-h-9 w-full min-w-36 select-none items-center justify-between gap-2 rounded-lg border border-input bg-(--control-background,var(--background)) not-dark:bg-clip-padding px-[calc(--spacing(3)-1px)] text-left text-base text-foreground outline-none ring-ring-soft transition-shadow before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-lg)-1px)] pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 focus-visible:border-ring focus-visible:ring-[3px] aria-invalid:border-destructive-border focus-visible:aria-invalid:border-destructive-border-strong focus-visible:aria-invalid:ring-destructive-border-strong data-disabled:pointer-events-none data-disabled:opacity-64 sm:min-h-8 sm:text-sm dark:aria-invalid:ring-destructive-border-strong [&_svg:not([class*='opacity-'])]:opacity-80 [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+    controlSurfaceClassName,
+    controlPressableClassName,
+    "hover:bg-accent not-disabled:not-data-disabled:active:bg-accent-pressed data-pressed:bg-accent-pressed data-popup-open:bg-accent-pressed data-popup-open:shadow-none",
+    controlDisabledClassName,
+  ],
   {
     defaultVariants: {
       size: "default",
@@ -49,7 +62,7 @@ export function SelectButton({
   const defaultProps = {
     children: (
       <>
-        <span className="flex-1 truncate in-data-placeholder:text-muted-foreground/72">
+        <span className="flex-1 truncate in-data-placeholder:text-muted-foreground">
           {children}
         </span>
         <ChevronsUpDownIcon className={selectTriggerIconClassName} />
@@ -150,7 +163,7 @@ export function SelectPopup({
           <div className="relative h-full min-w-(--anchor-width) rounded-lg border bg-popover not-dark:bg-clip-padding shadow-lg/5 before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-lg)-1px)] before:shadow-[0_1px_--theme(--color-black/4%)] dark:before:shadow-[0_-1px_--theme(--color-white/6%)]">
             <SelectPrimitive.List
               className={cn(
-                "max-h-(--available-height) overflow-y-auto p-1",
+                "flex max-h-(--available-height) flex-col gap-0.5 overflow-y-auto p-1 *:shrink-0",
                 className,
               )}
               data-slot="select-list"
@@ -178,13 +191,16 @@ export function SelectItem({
   return (
     <SelectPrimitive.Item
       className={cn(
-        "grid min-h-8 in-data-[side=none]:min-w-[calc(var(--anchor-width)+1.25rem)] cursor-default grid-cols-[1rem_1fr] items-center gap-2 rounded-sm py-1 ps-2 pe-4 text-base outline-none data-disabled:pointer-events-none data-highlighted:bg-accent data-highlighted:text-accent-foreground data-disabled:opacity-64 sm:min-h-7 sm:text-sm [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "min-h-8 sm:grid-cols-[minmax(0,1fr)_1rem] gap-2 px-2 py-1 text-base sm:min-h-7 sm:text-sm [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 grid cursor-default grid-cols-[minmax(0,1fr)_1.125rem] items-center rounded-sm outline-none in-data-[side=none]:min-w-[calc(var(--anchor-width)+1.25rem)] data-disabled:pointer-events-none data-disabled:opacity-64 data-highlighted:bg-accent data-highlighted:text-accent-foreground data-selected:bg-selected data-selected:text-selected-foreground data-selected:data-highlighted:bg-selected-pressed data-selected:data-highlighted:text-selected-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0",
         className,
       )}
       data-slot="select-item"
       {...props}
     >
-      <SelectPrimitive.ItemIndicator className="col-start-1">
+      <SelectPrimitive.ItemText className="min-w-0 col-start-1 row-start-1 wrap-anywhere">
+        {children}
+      </SelectPrimitive.ItemText>
+      <SelectPrimitive.ItemIndicator className="col-start-2 row-start-1 justify-self-end">
         <svg
           aria-hidden="true"
           fill="none"
@@ -200,9 +216,6 @@ export function SelectItem({
           <path d="M5.252 12.7 10.2 18.63 18.748 5.37" />
         </svg>
       </SelectPrimitive.ItemIndicator>
-      <SelectPrimitive.ItemText className="col-start-2 min-w-0">
-        {children}
-      </SelectPrimitive.ItemText>
     </SelectPrimitive.Item>
   );
 }
@@ -220,10 +233,17 @@ export function SelectSeparator({
   );
 }
 
-export function SelectGroup(
-  props: SelectPrimitive.Group.Props,
-): React.ReactElement {
-  return <SelectPrimitive.Group data-slot="select-group" {...props} />;
+export function SelectGroup({
+  className,
+  ...props
+}: SelectPrimitive.Group.Props): React.ReactElement {
+  return (
+    <SelectPrimitive.Group
+      className={cn("flex flex-col gap-0.5 *:shrink-0", className)}
+      data-slot="select-group"
+      {...props}
+    />
+  );
 }
 
 export function SelectLabel({

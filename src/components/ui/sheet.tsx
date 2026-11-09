@@ -1,5 +1,7 @@
 "use client";
 
+// Adapted from coss ui (https://coss.com/ui), MIT License,
+// Copyright (c) 2025 coss.com and Origin UI.
 import { Dialog as SheetPrimitive } from "@base-ui/react/dialog";
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
@@ -32,7 +34,7 @@ export function SheetBackdrop({
   return (
     <SheetPrimitive.Backdrop
       className={cn(
-        "fixed inset-0 z-50 bg-black/32 backdrop-blur-sm transition-all duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0",
+        "fixed inset-0 z-50 bg-overlay backdrop-blur-sm transition-all duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute",
         className,
       )}
       data-slot="sheet-backdrop"
@@ -153,7 +155,7 @@ export function SheetFooter({
   const defaultProps = {
     className: cn(
       "flex flex-col-reverse gap-2 px-6 sm:flex-row sm:justify-end",
-      variant === "default" && "border-t bg-muted/72 py-4",
+      variant === "default" && "border-t bg-muted py-4",
       variant === "bare" &&
         "in-[[data-slot=sheet-popup]:has([data-slot=sheet-panel])]:pt-3 pt-4 pb-6",
       className,
@@ -174,10 +176,7 @@ export function SheetTitle({
 }: SheetPrimitive.Title.Props): React.ReactElement {
   return (
     <SheetPrimitive.Title
-      className={cn(
-        "font-heading font-semibold text-xl leading-none",
-        className,
-      )}
+      className={cn("font-bold font-heading text-xl leading-none", className)}
       data-slot="sheet-title"
       {...props}
     />
@@ -214,7 +213,7 @@ export function SheetPanel({
   };
 
   return (
-    <ScrollArea scrollFade={scrollFade}>
+    <ScrollArea overscrollContain scrollFade={scrollFade}>
       {useRender({
         defaultTagName: "div",
         props: mergeProps<"div">(defaultProps, props),
