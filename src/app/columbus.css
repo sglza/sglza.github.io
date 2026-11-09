@@ -1,0 +1,449 @@
+/*
+ * Columbus design tokens — the source of truth.
+ *
+ * Used directly by Storybook and the docs site. `pnpm build` copies the
+ * :root and .dark variables into the `theme` item in registry.json, which
+ * consumers install with `npx shadcn add @columbus/theme`.
+ *
+ * Token names extend shadcn/ui's, so Columbus components also work with an
+ * existing shadcn theme. As in coss ui, which the components are adapted from,
+ * --destructive-foreground is red text for neutral surfaces (for example
+ * the destructive-outline button), not text on a red fill; text on the red
+ * fill is --destructive-contrast.
+ *
+ * Ramp colors are steps of a Radix scale, used only for the job Radix
+ * defines for that step. Comments name the step. Scales: sand (warm neutrals),
+ * and custom ramps blue (accent, #007cbe),
+ * red (destructive, #dd0426), green (success, #00af54), yellow (warning,
+ * #fbaf00). Values are each step's sRGB hex written as in-gamut oklch.
+ * Solid and selected pressed fills shade their existing role by 4% in Oklab.
+ * Sand source: https://github.com/radix-ui/colors/tree/main/src
+ *
+ *   1-2   page and subtle backgrounds      background, card, popover, -subtle
+ *   3     component background             secondary, muted, accent (hover of
+ *                                          a transparent component), -soft,
+ *                                          ring-soft
+ *   4     component hover                  secondary-hover
+ *   5     pressed or selected              secondary-pressed, accent-pressed,
+ *                                          selected
+ *   6     border, non-interactive          border, -border-subtle
+ *   7     border, interactive; focus ring  input, ring, destructive-border
+ *   8     strong border                    destructive-border-strong
+ *   9     solid fill                       primary, destructive, muted-solid
+ *   10    solid fill hover                 primary-hover, destructive-hover
+ *   11    low-contrast text                muted-foreground, -foreground,
+ *                                          primary-text
+ *   12    high-contrast text               foreground, selected-foreground
+ *
+ * --primary-hover and --selected/--selected-foreground fall back to the
+ * shadcn look in components when a theme doesn't define them. --muted-alpha
+ * uses sandA3 to tint the underlying surface; --muted-pressed-alpha uses sandA5.
+ * --overlay is Radix blackA5.
+ * Badge alpha tokens use steps A3/A11, plus A4/A5 for neutral interactions.
+ * Custom alpha colors are derived from the solid ramps over white (light)
+ * and sand-1 (dark). Light alpha text is darkened for contrast on muted
+ * surfaces; saturated text steps can remain opaque after conversion.
+ * Derivation: https://github.com/radix-ui/website/blob/main/components/generate-radix-colors.tsx
+ */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --radius: 0.625rem;
+
+  /* Shallow relief for controls; panels and content surfaces stay flat. */
+  --control-background: oklch(1 0 0);
+  --control-surface: linear-gradient(
+    180deg,
+    oklch(1 0 0 / 0.025),
+    oklch(0 0 0 / 0.025)
+  );
+  /* A gradual face gradient supports the continuous rounded edge. */
+  --control-solid-surface: linear-gradient(
+    180deg,
+    oklch(1 0 0 / 0.06),
+    oklch(0 0 0 / 0.04)
+  );
+  --control-edge-top: oklch(1 0 0 / 0.85);
+  --control-edge-bottom: oklch(0 0 0 / 0.14);
+  --control-solid-edge-top: oklch(1 0 0 / 0.24);
+  --control-solid-edge-bottom: oklch(0 0 0 / 0.16);
+  --control-shadow: 0 1px 2px oklch(0 0 0 / 0.14);
+  --switch-thumb-highlight: oklch(1 0 0 / 0.8);
+  --switch-thumb-shade: oklch(0 0 0 / 0.055);
+
+  --background: oklch(0.994 0.0013 106.424); /* sand-1 */
+  --foreground: oklch(0.243 0.0076 95.372); /* sand-12 */
+  --card: oklch(0.982 0.0013 106.424); /* sand-2 */
+  --card-foreground: oklch(0.243 0.0076 95.372); /* sand-12 */
+  --popover: oklch(0.982 0.0013 106.424); /* sand-2 */
+  --popover-foreground: oklch(0.243 0.0076 95.372); /* sand-12 */
+  --primary: oklch(0.563 0.1359 242.929); /* blue-9 */
+  --primary-foreground: oklch(1 0 0); /* blue-contrast */
+  --primary-hover: oklch(0.52 0.131 245.218); /* blue-10 */
+  --primary-pressed: color-mix(
+    in oklab,
+    var(--primary-hover, var(--primary)) 96%,
+    oklch(0 0 0)
+  );
+  --primary-text: oklch(0.536 0.133 244.622); /* blue-11 */
+  --secondary: oklch(0.956 0.0017 67.802); /* sand-3 */
+  --secondary-hover: oklch(0.931 0.0029 84.559); /* sand-4 */
+  --secondary-pressed: oklch(0.91 0.0042 91.449); /* sand-5 */
+  --secondary-foreground: oklch(0.243 0.0076 95.372); /* sand-12 */
+  --secondary-alpha: oklch(0.1915 0.0418 68.852 / 0.062745); /* sandA3 */
+  --secondary-hover-alpha: oklch(0.203 0.0415 86.184 / 0.098039); /* sandA4 */
+  --secondary-pressed-alpha: oklch(
+    0.2113 0.0434 94.537 / 0.129412
+  ); /* sandA5 */
+  --secondary-foreground-alpha: oklch(
+    0.1301 0.0284 109.769 / 0.631373
+  ); /* sandA11 */
+  --muted: oklch(0.956 0.0017 67.802); /* sand-3 */
+  --muted-alpha: oklch(0.1915 0.0418 68.852 / 0.062745); /* sandA3 */
+  --muted-pressed-alpha: oklch(0.2113 0.0434 94.537 / 0.129412); /* sandA5 */
+  --muted-solid: oklch(0.641 0.0102 106.685); /* sand-9 */
+  --muted-foreground: oklch(0.498 0.0078 106.679); /* sand-11 */
+  --accent: oklch(0.956 0.0017 67.802); /* sand-3 */
+  --accent-pressed: oklch(0.91 0.0042 91.449); /* sand-5 */
+  --accent-foreground: oklch(0.243 0.0076 95.372); /* sand-12 */
+  --selected: oklch(0.9 0.0544 239.153); /* blue-5 */
+  --selected-pressed: color-mix(
+    in oklab,
+    var(--selected, var(--accent)) 96%,
+    oklch(0 0 0)
+  );
+  --selected-foreground: oklch(0.339 0.0597 242.479); /* blue-12 */
+  --destructive: oklch(0.566 0.2282 24.79); /* red-9 */
+  --destructive-contrast: oklch(1 0 0); /* red-contrast */
+  --destructive-hover: oklch(0.532 0.2166 27.029); /* red-10 */
+  --destructive-pressed: color-mix(
+    in oklab,
+    var(--destructive-hover, var(--destructive)) 96%,
+    oklch(0 0 0)
+  );
+  --destructive-foreground: oklch(0.56 0.2269 25.085); /* red-11 */
+  --destructive-subtle: oklch(0.982 0.0086 26.016); /* red-2 */
+  --destructive-soft: oklch(0.955 0.0222 27.81); /* red-3 */
+  --destructive-soft-alpha: oklch(0.6412 0.2452 30.981 / 0.094118); /* redA3 */
+  --destructive-foreground-alpha: oklch(0.5275 0.2153 27.538 / 1); /* redA11 */
+  --destructive-border-subtle: oklch(0.851 0.0809 24.512); /* red-6 */
+  --destructive-border: oklch(0.808 0.103 24.691); /* red-7 */
+  --destructive-border-strong: oklch(0.746 0.1303 25.211); /* red-8 */
+  --info: oklch(0.563 0.1359 242.929); /* blue-9 */
+  --info-foreground: oklch(0.536 0.133 244.622); /* blue-11 */
+  --info-subtle: oklch(0.979 0.0102 247.931); /* blue-2 */
+  --info-soft: oklch(0.957 0.0241 234.415); /* blue-3 */
+  --info-soft-alpha: oklch(0.6896 0.1744 245.651 / 0.117647); /* blueA3 */
+  --info-foreground-alpha: oklch(0.5046 0.1293 245.842 / 1); /* blueA11 */
+  --info-border-subtle: oklch(0.859 0.0706 242.911); /* blue-6 */
+  --success: oklch(0.66 0.1783 150.785); /* green-9 */
+  --success-foreground: oklch(0.532 0.1505 148.875); /* green-11 */
+  --success-subtle: oklch(0.981 0.0107 149.863); /* green-2 */
+  --success-soft: oklch(0.961 0.0281 151.931); /* green-3 */
+  --success-soft-alpha: oklch(0.6849 0.2218 144.028 / 0.101961); /* greenA3 */
+  --success-foreground-alpha: oklch(0.4932 0.1449 147.43 / 1); /* greenA11 */
+  --success-border-subtle: oklch(0.858 0.0869 150.579); /* green-6 */
+  --warning: oklch(0.806 0.1684 77.353); /* yellow-9 */
+  --warning-foreground: oklch(0.573 0.1227 71.89); /* yellow-11 */
+  --warning-subtle: oklch(0.982 0.0219 89.788); /* yellow-2 */
+  --warning-soft: oklch(0.959 0.0569 92.139); /* yellow-3 */
+  --warning-soft-alpha: oklch(0.8403 0.1724 84.076 / 0.219608); /* yellowA3 */
+  --warning-foreground-alpha: oklch(0.5164 0.1136 67.672 / 1); /* yellowA11 */
+  --warning-border-subtle: oklch(0.874 0.1212 80.524); /* yellow-6 */
+  --border: oklch(0.885 0.0042 91.451); /* sand-6 */
+  --input: oklch(0.851 0.0056 95.111); /* sand-7 */
+  --ring: oklch(0.804 0.0881 243.51); /* blue-7 */
+  --ring-soft: oklch(0.957 0.0241 234.415); /* blue-3 */
+  --overlay: oklch(0 0 0 / 0.3); /* blackA5 */
+}
+
+.dark {
+  --control-background: oklch(0.252 0.0019 106.532); /* sand-3 */
+  --control-surface: linear-gradient(
+    180deg,
+    oklch(1 0 0 / 0.035),
+    oklch(0 0 0 / 0.025)
+  );
+  --control-solid-surface: linear-gradient(
+    180deg,
+    oklch(1 0 0 / 0.06),
+    oklch(0 0 0 / 0.04)
+  );
+  --control-edge-top: oklch(1 0 0 / 0.12);
+  --control-edge-bottom: oklch(0 0 0 / 0.24);
+  --control-shadow: 0 1px 2px oklch(0 0 0 / 0.4);
+  --switch-thumb-highlight: oklch(1 0 0 / 0.1);
+  --switch-thumb-shade: oklch(0 0 0 / 0.16);
+  --background: oklch(0.177 0.002 106.604); /* sand-1 */
+  --foreground: oklch(0.949 0.0027 106.45); /* sand-12 */
+  --card: oklch(0.213 0.0019 106.562); /* sand-2 */
+  --card-foreground: oklch(0.949 0.0027 106.45); /* sand-12 */
+  --popover: oklch(0.213 0.0019 106.562); /* sand-2 */
+  --popover-foreground: oklch(0.949 0.0027 106.45); /* sand-12 */
+  --primary: oklch(0.563 0.1359 242.929); /* blue-9 */
+  --primary-foreground: oklch(1 0 0); /* blue-contrast */
+  --primary-hover: oklch(0.52 0.131 245.218); /* blue-10 */
+  --primary-pressed: color-mix(
+    in oklab,
+    var(--primary-hover, var(--primary)) 96%,
+    oklch(0 0 0)
+  );
+  --primary-text: oklch(0.783 0.1203 242.696); /* blue-11 */
+  --secondary: oklch(0.252 0.0019 106.532); /* sand-3 */
+  --secondary-hover: oklch(0.284 0.0036 106.626); /* sand-4 */
+  --secondary-pressed: oklch(0.312 0.0052 106.7); /* sand-5 */
+  --secondary-foreground: oklch(0.949 0.0027 106.45); /* sand-12 */
+  --secondary-alpha: oklch(0.9729 0.0013 106.424 / 0.07451); /* sandA3 */
+  --secondary-hover-alpha: oklch(0.994 0.0144 106.659 / 0.105882); /* sandA4 */
+  --secondary-pressed-alpha: oklch(
+    0.9838 0.021 106.779 / 0.137255
+  ); /* sandA5 */
+  --secondary-foreground-alpha: oklch(
+    0.9912 0.011 89.72 / 0.690196
+  ); /* sandA11 */
+  --muted: oklch(0.252 0.0019 106.532); /* sand-3 */
+  --muted-alpha: oklch(0.9729 0.0013 106.424 / 0.07451); /* sandA3 */
+  --muted-pressed-alpha: oklch(0.9838 0.021 106.779 / 0.137255); /* sandA5 */
+  --muted-solid: oklch(0.534 0.011 93.672); /* sand-9 */
+  --muted-foreground: oklch(0.767 0.0087 91.506); /* sand-11 */
+  --accent: oklch(0.252 0.0019 106.532); /* sand-3 */
+  --accent-pressed: oklch(0.312 0.0052 106.7); /* sand-5 */
+  --accent-foreground: oklch(0.949 0.0027 106.45); /* sand-12 */
+  --selected: oklch(0.371 0.0955 246.08); /* blue-5 */
+  --selected-pressed: color-mix(
+    in oklab,
+    var(--selected, var(--accent)) 96%,
+    oklch(0 0 0)
+  );
+  --selected-foreground: oklch(0.922 0.0472 229.546); /* blue-12 */
+  --destructive: oklch(0.566 0.2282 24.79); /* red-9 */
+  --destructive-contrast: oklch(1 0 0); /* red-contrast */
+  --destructive-hover: oklch(0.521 0.1727 24.835); /* red-10 */
+  --destructive-pressed: color-mix(
+    in oklab,
+    var(--destructive-hover, var(--destructive)) 96%,
+    oklch(0 0 0)
+  );
+  --destructive-foreground: oklch(0.769 0.1363 25.032); /* red-11 */
+  --destructive-subtle: oklch(0.203 0.0253 23.73); /* red-2 */
+  --destructive-soft: oklch(0.25 0.0763 24.517); /* red-3 */
+  --destructive-soft-alpha: oklch(0.6229 0.2548 28.956 / 0.196078); /* redA3 */
+  --destructive-foreground-alpha: oklch(0.7685 0.1367 25.032 / 1); /* redA11 */
+  --destructive-border-subtle: oklch(0.382 0.1314 24.627); /* red-6 */
+  --destructive-border: oklch(0.45 0.1416 24.887); /* red-7 */
+  --destructive-border-strong: oklch(0.544 0.1728 24.633); /* red-8 */
+  --info: oklch(0.563 0.1359 242.929); /* blue-9 */
+  --info-foreground: oklch(0.783 0.1203 242.696); /* blue-11 */
+  --info-subtle: oklch(0.214 0.0329 241.338); /* blue-2 */
+  --info-soft: oklch(0.27 0.066 243.583); /* blue-3 */
+  --info-soft-alpha: oklch(0.6095 0.2106 256.319 / 0.219608); /* blueA3 */
+  --info-foreground-alpha: oklch(0.7829 0.1204 242.696 / 1); /* blueA11 */
+  --info-border-subtle: oklch(0.426 0.1045 243.788); /* blue-6 */
+  --success: oklch(0.66 0.1783 150.785); /* green-9 */
+  --success-foreground: oklch(0.78 0.1772 150.698); /* green-11 */
+  --success-subtle: oklch(0.211 0.019 151.28); /* green-2 */
+  --success-soft: oklch(0.267 0.0382 151.084); /* green-3 */
+  --success-soft-alpha: oklch(0.8795 0.2251 148.641 / 0.109804); /* greenA3 */
+  --success-foreground-alpha: oklch(
+    0.8857 0.2054 150.48 / 0.831373
+  ); /* greenA11 */
+  --success-border-subtle: oklch(0.415 0.088 151.039); /* green-6 */
+  --warning: oklch(0.806 0.1684 77.353); /* yellow-9 */
+  --warning-foreground: oklch(0.84 0.1572 80.592); /* yellow-11 */
+  --warning-subtle: oklch(0.209 0.0177 74.555); /* yellow-2 */
+  --warning-soft: oklch(0.257 0.0424 75.375); /* yellow-3 */
+  --warning-soft-alpha: oklch(0.7314 0.1777 56.618 / 0.129412); /* yellowA3 */
+  --warning-foreground-alpha: oklch(0.8402 0.1572 80.592 / 1); /* yellowA11 */
+  --warning-border-subtle: oklch(0.387 0.0773 77.341); /* yellow-6 */
+  --border: oklch(0.348 0.0053 91.537); /* sand-6 */
+  --input: oklch(0.401 0.0067 95.225); /* sand-7 */
+  --ring: oklch(0.484 0.1172 243.15); /* blue-7 */
+  --ring-soft: oklch(0.27 0.066 243.583); /* blue-3 */
+  --overlay: oklch(0 0 0 / 0.3); /* blackA5 */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-pressed: var(--primary-pressed);
+  --color-primary-text: var(--primary-text);
+  --color-secondary: var(--secondary);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-secondary-pressed: var(--secondary-pressed);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-alpha: var(--secondary-alpha);
+  --color-secondary-hover-alpha: var(--secondary-hover-alpha);
+  --color-secondary-pressed-alpha: var(--secondary-pressed-alpha);
+  --color-secondary-foreground-alpha: var(--secondary-foreground-alpha);
+  --color-muted: var(--muted);
+  --color-muted-alpha: var(--muted-alpha);
+  --color-muted-pressed-alpha: var(--muted-pressed-alpha);
+  --color-muted-solid: var(--muted-solid);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-pressed: var(--accent-pressed);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-selected: var(--selected);
+  --color-selected-pressed: var(--selected-pressed);
+  --color-selected-foreground: var(--selected-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-contrast: var(--destructive-contrast);
+  --color-destructive-hover: var(--destructive-hover);
+  --color-destructive-pressed: var(--destructive-pressed);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-subtle: var(--destructive-subtle);
+  --color-destructive-soft: var(--destructive-soft);
+  --color-destructive-soft-alpha: var(--destructive-soft-alpha);
+  --color-destructive-foreground-alpha: var(--destructive-foreground-alpha);
+  --color-destructive-border-subtle: var(--destructive-border-subtle);
+  --color-destructive-border: var(--destructive-border);
+  --color-destructive-border-strong: var(--destructive-border-strong);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-info-subtle: var(--info-subtle);
+  --color-info-soft: var(--info-soft);
+  --color-info-soft-alpha: var(--info-soft-alpha);
+  --color-info-foreground-alpha: var(--info-foreground-alpha);
+  --color-info-border-subtle: var(--info-border-subtle);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-subtle: var(--success-subtle);
+  --color-success-soft: var(--success-soft);
+  --color-success-soft-alpha: var(--success-soft-alpha);
+  --color-success-foreground-alpha: var(--success-foreground-alpha);
+  --color-success-border-subtle: var(--success-border-subtle);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-subtle: var(--warning-subtle);
+  --color-warning-soft: var(--warning-soft);
+  --color-warning-soft-alpha: var(--warning-soft-alpha);
+  --color-warning-foreground-alpha: var(--warning-foreground-alpha);
+  --color-warning-border-subtle: var(--warning-border-subtle);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-soft: var(--ring-soft);
+  --color-overlay: var(--overlay);
+
+  /* Same radius scale the shadcn CLI writes into consumer projects. */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/*
+ * Component animations. Their registry items carry the same values, so
+ * `shadcn add` installs them with the component.
+ */
+@theme inline {
+  --animate-skeleton: skeleton 2s -1s infinite linear;
+  --animate-caret-blink: 1s ease-out infinite caret-blink;
+  --animate-toast-success-odd: toast-success-odd 0.32s
+    cubic-bezier(0.5, 1, 0.89, 1);
+  --animate-toast-success-even: toast-success-even 0.32s
+    cubic-bezier(0.5, 1, 0.89, 1);
+  --animate-toast-error-odd: toast-error-odd 0.28s cubic-bezier(0.5, 1, 0.89, 1);
+  --animate-toast-error-even: toast-error-even 0.28s
+    cubic-bezier(0.5, 1, 0.89, 1);
+
+  @keyframes skeleton {
+    to {
+      background-position: -200% 0;
+    }
+  }
+  @keyframes caret-blink {
+    0%,
+    70%,
+    to {
+      opacity: 1;
+    }
+    20%,
+    50% {
+      opacity: 0;
+    }
+  }
+  @keyframes toast-success-odd {
+    0% {
+      scale: 1;
+    }
+    30% {
+      scale: 1.025;
+    }
+    60% {
+      scale: 0.99;
+    }
+    100% {
+      scale: 1;
+    }
+  }
+  @keyframes toast-success-even {
+    0% {
+      scale: 1;
+    }
+    30% {
+      scale: 1.025;
+    }
+    60% {
+      scale: 0.99;
+    }
+    100% {
+      scale: 1;
+    }
+  }
+  @keyframes toast-error-odd {
+    0% {
+      translate: 0 0;
+    }
+    25% {
+      translate: -3px 0;
+    }
+    50% {
+      translate: 3px 0;
+    }
+    75% {
+      translate: -3px 0;
+    }
+    100% {
+      translate: 0 0;
+    }
+  }
+  @keyframes toast-error-even {
+    0% {
+      translate: 0 0;
+    }
+    25% {
+      translate: -3px 0;
+    }
+    50% {
+      translate: 3px 0;
+    }
+    75% {
+      translate: -3px 0;
+    }
+    100% {
+      translate: 0 0;
+    }
+  }
+}
+
+/*
+ * Base styles the components expect, same as the shadcn CLI writes into
+ * consumer projects. The theme item carries them as `css`.
+ */
+@layer base {
+  * {
+    @apply border-border outline-ring;
+  }
+}

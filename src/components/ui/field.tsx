@@ -1,5 +1,7 @@
 "use client";
 
+// Adapted from coss ui (https://coss.com/ui), MIT License,
+// Copyright (c) 2025 coss.com and Origin UI.
 import { Field as FieldPrimitive } from "@base-ui/react/field";
 import type React from "react";
 import { cn } from "@/lib/utils";

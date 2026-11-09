@@ -1,5 +1,19 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Design system
+
+The site uses [Columbus](https://columbus.sglza.xyz/), a Base UI and Tailwind CSS v4
+design system. Components are installed as source in `src/components/ui`, with
+shared control styling in `src/lib/control-surface.ts` and the light/dark tokens
+in `src/app/columbus.css`. Portfolio styles and page transitions live separately
+in `src/app/globals.css`.
+
+The `@columbus` registry is configured in `components.json`. Add components with
+`npx shadcn@latest add @columbus/<component>`. When updating existing components,
+review the diff: `popover.tsx` keeps a local `positionerClassName` prop for tour
+animations, and `popover-extension.tsx` contains the custom spotlight. Style
+navigation links with `buttonVariants` from `@/components/ui/button-variants`.
+
 ## Getting Started
 
 First, run the development server:
@@ -18,7 +32,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load Inter.
 
 ## Learn More
 

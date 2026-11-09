@@ -9,6 +9,7 @@ import { Coachmark } from "coachmark";
 import { DeploymentDetailsCard } from "@/components/deployment-details-card";
 import { PageHeader } from "@/components/page-header";
 import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button-variants";
 import {
   Select,
   SelectItem,
@@ -212,23 +213,22 @@ export function CoachmarkDocs() {
               </p>
 
               <div className="mt-8 flex flex-wrap gap-2">
-                <Button
-                  render={
-                    <a
-                      href="https://github.com/sglza/coachmark"
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    />
-                  }
-                  variant="outline"
+                <a
+                  className={buttonVariants({ variant: "outline" })}
+                  href="https://github.com/sglza/coachmark"
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
                   <FaGithub aria-hidden="true" />
                   GitHub
-                </Button>
-                <Button render={<a href="/coachmark.md" />} variant="outline">
+                </a>
+                <a
+                  className={buttonVariants({ variant: "outline" })}
+                  href="/coachmark.md"
+                >
                   <FaMarkdown aria-hidden="true" />
                   View as Markdown
-                </Button>
+                </a>
               </div>
             </header>
 
@@ -848,7 +848,7 @@ function OffscreenTargetsDemo({ stylingMode }: { stylingMode: StylingMode }) {
                     className={cn(
                       "flex min-h-16 items-start justify-between gap-4 rounded-lg border bg-background p-3",
                       activity.status === "running" &&
-                        "border-info/24 bg-info/4",
+                        "border-info-border-subtle bg-info-subtle",
                       activity.status === "pending" && "bg-muted/30",
                     )}
                     key={activity.key}

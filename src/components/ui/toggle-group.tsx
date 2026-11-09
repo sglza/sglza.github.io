@@ -1,5 +1,7 @@
 "use client";
 
+// Adapted from coss ui (https://coss.com/ui), MIT License,
+// Copyright (c) 2025 coss.com and Origin UI.
 import type { Toggle as TogglePrimitive } from "@base-ui/react/toggle";
 import { ToggleGroup as ToggleGroupPrimitive } from "@base-ui/react/toggle-group";
 import type { VariantProps } from "class-variance-authority";
@@ -30,7 +32,7 @@ export function ToggleGroup({
   return (
     <ToggleGroupPrimitive
       className={cn(
-        "flex w-fit *:focus-visible:z-10 dark:*:[[data-slot=separator]:has(+[data-slot=toggle]:hover)]:before:bg-input/64 dark:*:[[data-slot=separator]:has(+[data-slot=toggle][data-pressed])]:before:bg-input dark:*:[[data-slot=toggle]:hover+[data-slot=separator]]:before:bg-input/64 dark:*:[[data-slot=toggle][data-pressed]+[data-slot=separator]]:before:bg-input",
+        "flex w-fit *:focus-visible:z-10 dark:*:[[data-slot=separator]:has(+[data-slot=toggle]:hover)]:before:bg-accent dark:*:[[data-slot=separator]:has(+[data-slot=toggle][data-pressed])]:before:bg-[color:var(--selected,var(--input))] dark:*:[[data-slot=toggle]:hover+[data-slot=separator]]:before:bg-accent dark:*:[[data-slot=toggle][data-pressed]+[data-slot=separator]]:before:bg-[color:var(--selected,var(--input))]",
         orientation === "horizontal"
           ? "*:pointer-coarse:after:min-w-auto"
           : "*:pointer-coarse:after:min-h-auto",
@@ -91,7 +93,7 @@ export function ToggleGroupSeparator({
   return (
     <Separator
       className={cn(
-        "pointer-events-none relative bg-input before:absolute before:inset-0 dark:before:bg-input/32",
+        "pointer-events-none relative bg-input before:absolute before:inset-0 ",
         className,
       )}
       orientation={orientation}

@@ -71,7 +71,7 @@ type PopoverBackdropProps = PopoverPrimitive.Backdrop.Props & {
   portalProps?: PopoverPrimitive.Portal.Props;
 };
 
-/** A dimming layer for COSS popovers, kept separate from the registry file. */
+/** A dimming layer for Columbus popovers, kept separate from the registry file. */
 export function PopoverBackdrop({
   className,
   portalProps,

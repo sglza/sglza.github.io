@@ -48,7 +48,6 @@ export function ThemeToggle() {
         aria-label={
           isDark || !mounted ? "Switch to light theme" : "Switch to dark theme"
         }
-        className="bg-background/85 backdrop-blur-md"
         onPressedChange={handleCheckedChange}
         pressed={isDark}
         size="default"
