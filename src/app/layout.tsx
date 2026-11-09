@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Inter } from "next/font/google";
 
 import { ThemeProvider } from "@/components/theme-provider";
 import { AnchoredToastProvider, ToastProvider } from "@/components/ui/toast";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const interSans = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -21,8 +21,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html suppressHydrationWarning lang="en" className="theme">
-      <body className={`${geistSans.className} relative isolate antialiased`}>
+    <html
+      suppressHydrationWarning
+      lang="en"
+      className={`theme ${interSans.variable}`}
+    >
+      <body className="relative isolate antialiased">
         <ThemeProvider>
           <ToastProvider>
             <AnchoredToastProvider>{children}</AnchoredToastProvider>

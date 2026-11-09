@@ -1,3 +1,5 @@
+// Adapted from coss ui (https://coss.com/ui), MIT License,
+// Copyright (c) 2025 coss.com and Origin UI.
 import type * as React from "react";
 import { cn } from "@/lib/utils";
 
@@ -8,7 +10,7 @@ export function Frame({
   return (
     <div
       className={cn(
-        "relative flex flex-col rounded-2xl bg-muted/72 p-1",
+        "relative flex flex-col rounded-2xl bg-muted p-1",
         "*:[[data-slot=frame-panel]+[data-slot=frame-panel]]:mt-1",
         className,
       )}

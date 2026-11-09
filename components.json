@@ -19,6 +19,6 @@
     "hooks": "@/hooks"
   },
   "registries": {
-    "@coss": "https://coss.com/ui/r/{name}.json"
+    "@columbus": "https://columbus.sglza.xyz/r/{name}.json"
   }
 }

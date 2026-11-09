@@ -1,3 +1,5 @@
+// Adapted from coss ui (https://coss.com/ui), MIT License,
+// Copyright (c) 2025 coss.com and Origin UI.
 import { cva, type VariantProps } from "class-variance-authority";
 import type * as React from "react";
 import { cn } from "@/lib/utils";
@@ -11,12 +13,12 @@ const alertVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-transparent dark:bg-input/32 [&>svg]:text-muted-foreground",
+          "bg-card [&>svg]:text-muted-foreground",
         error:
-          "border-destructive/32 bg-destructive/4 [&>svg]:text-destructive",
-        info: "border-info/32 bg-info/4 [&>svg]:text-info",
-        success: "border-success/32 bg-success/4 [&>svg]:text-success",
-        warning: "border-warning/32 bg-warning/4 [&>svg]:text-warning",
+          "border-destructive-border-subtle bg-destructive-subtle [&>svg]:text-destructive-foreground",
+        info: "border-info-border-subtle bg-info-subtle [&>svg]:text-info-foreground",
+        success: "border-success-border-subtle bg-success-subtle [&>svg]:text-success-foreground",
+        warning: "border-warning-border-subtle bg-warning-subtle [&>svg]:text-warning-foreground",
       },
     },
   },

@@ -3,7 +3,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import { AtSignIcon, Undo2 } from "lucide-react";
 
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button-variants";
 import { Separator } from "@/components/ui/separator";
 
 type PageHeaderProps = {
@@ -22,40 +22,34 @@ export function PageHeader({ backHref, backLabel = "Back" }: PageHeaderProps) {
       <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-3 px-4 pt-4 sm:px-8 sm:pt-6 lg:px-12">
         <div className="min-w-0 flex-1">
           {backHref ? (
-            <Button
-              render={<Link href={backHref} transitionTypes={["nav-back"]} />}
-              size="sm"
-              variant="ghost"
+            <Link
+              className={buttonVariants({ size: "sm", variant: "ghost" })}
+              href={backHref}
+              transitionTypes={["nav-back"]}
             >
               <Undo2 aria-hidden="true" />
               {backLabel}
-            </Button>
+            </Link>
           ) : null}
         </div>
         <div className="flex shrink-0 items-center gap-4">
           <div className="flex items-center gap-2">
-            <Button
+            <a
               aria-label="Open X profile"
-              render={
-                <a
-                  href={CONTACT_LINKS.twitter}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                />
-              }
-              size="icon"
-              variant="outline"
+              className={buttonVariants({ size: "icon", variant: "outline" })}
+              href={CONTACT_LINKS.twitter}
+              rel="noopener noreferrer"
+              target="_blank"
             >
               <FaXTwitter aria-hidden="true" />
-            </Button>
-            <Button
+            </a>
+            <a
               aria-label="Send email"
-              render={<a href={CONTACT_LINKS.email} />}
-              size="icon"
-              variant="outline"
+              className={buttonVariants({ size: "icon", variant: "outline" })}
+              href={CONTACT_LINKS.email}
             >
               <AtSignIcon aria-hidden="true" />
-            </Button>
+            </a>
           </div>
           <Separator orientation="vertical" />
           <ThemeToggle />
