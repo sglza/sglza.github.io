@@ -1,5 +1,3 @@
-// Adapted from coss ui (https://coss.com/ui), MIT License,
-// Copyright (c) 2025 coss.com and Origin UI.
 import { Separator as SeparatorPrimitive } from "@base-ui/react/separator";
 import type React from "react";
 import { cn } from "@/lib/utils";

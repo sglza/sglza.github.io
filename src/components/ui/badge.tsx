@@ -31,7 +31,7 @@ export const badgeVariants = cva(
       },
       variant: {
         default: [
-          "bg-primary text-primary-foreground [button&,a&]:hover:bg-(--primary-hover,color-mix(in_oklab,var(--primary)_90%,transparent)) [button&,a&]:not-disabled:not-data-disabled:active:bg-primary-pressed [button&,a&]:data-pressed:bg-primary-pressed",
+          "bg-primary text-primary-foreground [button&,a&]:hover:bg-(--primary-hover,var(--primary)) [button&,a&]:not-disabled:not-data-disabled:active:bg-primary-pressed [button&,a&]:data-pressed:bg-primary-pressed",
           controlSolidSurfaceClassName,
         ],
         destructive: [

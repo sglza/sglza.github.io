@@ -166,7 +166,7 @@ export const PricingCard = () => {
                       type="button"
                       onClick={() => handleChangePlan(planIndex - 1)}
                       disabled={planIndex === 0}
-                      variant="outline"
+                      variant="secondary"
                       aria-label="Decrease amount"
                     >
                       <MdOutlineRemove aria-hidden="true" />
@@ -180,7 +180,7 @@ export const PricingCard = () => {
                       onClick={() => handleChangePlan(planIndex + 1)}
                       disabled={planIndex === PLANS.length - 1}
                       aria-label="Increase amount"
-                      variant="outline"
+                      variant="secondary"
                     >
                       <MdOutlineAdd aria-hidden="true" />
                     </Button>

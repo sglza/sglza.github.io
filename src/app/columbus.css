@@ -7,9 +7,9 @@
  *
  * Token names extend shadcn/ui's, so Columbus components also work with an
  * existing shadcn theme. As in coss ui, which the components are adapted from,
- * --destructive-foreground is red text for neutral surfaces (for example
- * the destructive-outline button), not text on a red fill; text on the red
- * fill is --destructive-contrast.
+ * --destructive-foreground is red text for neutral surfaces, not text on a
+ * red fill; text on the solid red fill is --destructive-contrast. Soft red
+ * controls use --destructive-foreground-alpha for stronger light-theme text.
  *
  * Ramp colors are steps of a Radix scale, used only for the job Radix
  * defines for that step. Comments name the step. Scales: sand (warm neutrals),
@@ -20,6 +20,7 @@
  * Sand source: https://github.com/radix-ui/colors/tree/main/src
  *
  *   1-2   page and subtle backgrounds      background, card, popover, -subtle
+ *                                          (accent-subtle for card hover)
  *   3     component background             secondary, muted, accent (hover of
  *                                          a transparent component), -soft,
  *                                          ring-soft
@@ -68,7 +69,7 @@
   --control-edge-bottom: oklch(0 0 0 / 0.14);
   --control-solid-edge-top: oklch(1 0 0 / 0.24);
   --control-solid-edge-bottom: oklch(0 0 0 / 0.16);
-  --control-shadow: 0 1px 2px oklch(0 0 0 / 0.14);
+  --control-shadow: 0 0 3px oklch(0 0 0 / 0.1), 0 1px 2px oklch(0 0 0 / 0.12);
   --switch-thumb-highlight: oklch(1 0 0 / 0.8);
   --switch-thumb-shade: oklch(0 0 0 / 0.055);
 
@@ -104,6 +105,7 @@
   --muted-pressed-alpha: oklch(0.2113 0.0434 94.537 / 0.129412); /* sandA5 */
   --muted-solid: oklch(0.641 0.0102 106.685); /* sand-9 */
   --muted-foreground: oklch(0.498 0.0078 106.679); /* sand-11 */
+  --accent-subtle: oklch(0.982 0.0013 106.424); /* sand-2 */
   --accent: oklch(0.956 0.0017 67.802); /* sand-3 */
   --accent-pressed: oklch(0.91 0.0042 91.449); /* sand-5 */
   --accent-foreground: oklch(0.243 0.0076 95.372); /* sand-12 */
@@ -125,6 +127,16 @@
   --destructive-foreground: oklch(0.56 0.2269 25.085); /* red-11 */
   --destructive-subtle: oklch(0.982 0.0086 26.016); /* red-2 */
   --destructive-soft: oklch(0.955 0.0222 27.81); /* red-3 */
+  --destructive-subtle-hover: color-mix(
+    in oklab,
+    var(--destructive-subtle) 96%,
+    var(--destructive)
+  );
+  --destructive-subtle-pressed: color-mix(
+    in oklab,
+    var(--destructive-subtle) 94%,
+    var(--destructive)
+  );
   --destructive-soft-alpha: oklch(0.6412 0.2452 30.981 / 0.094118); /* redA3 */
   --destructive-foreground-alpha: oklch(0.5275 0.2153 27.538 / 1); /* redA11 */
   --destructive-border-subtle: oklch(0.851 0.0809 24.512); /* red-6 */
@@ -207,6 +219,7 @@
   --muted-pressed-alpha: oklch(0.9838 0.021 106.779 / 0.137255); /* sandA5 */
   --muted-solid: oklch(0.534 0.011 93.672); /* sand-9 */
   --muted-foreground: oklch(0.767 0.0087 91.506); /* sand-11 */
+  --accent-subtle: oklch(0.213 0.0019 106.562); /* sand-2 */
   --accent: oklch(0.252 0.0019 106.532); /* sand-3 */
   --accent-pressed: oklch(0.312 0.0052 106.7); /* sand-5 */
   --accent-foreground: oklch(0.949 0.0027 106.45); /* sand-12 */
@@ -228,6 +241,16 @@
   --destructive-foreground: oklch(0.769 0.1363 25.032); /* red-11 */
   --destructive-subtle: oklch(0.203 0.0253 23.73); /* red-2 */
   --destructive-soft: oklch(0.25 0.0763 24.517); /* red-3 */
+  --destructive-subtle-hover: color-mix(
+    in oklab,
+    var(--destructive-subtle) 96%,
+    var(--destructive)
+  );
+  --destructive-subtle-pressed: color-mix(
+    in oklab,
+    var(--destructive-subtle) 94%,
+    var(--destructive)
+  );
   --destructive-soft-alpha: oklch(0.6229 0.2548 28.956 / 0.196078); /* redA3 */
   --destructive-foreground-alpha: oklch(0.7685 0.1367 25.032 / 1); /* redA11 */
   --destructive-border-subtle: oklch(0.382 0.1314 24.627); /* red-6 */
@@ -288,6 +311,7 @@
   --color-muted-pressed-alpha: var(--muted-pressed-alpha);
   --color-muted-solid: var(--muted-solid);
   --color-muted-foreground: var(--muted-foreground);
+  --color-accent-subtle: var(--accent-subtle);
   --color-accent: var(--accent);
   --color-accent-pressed: var(--accent-pressed);
   --color-accent-foreground: var(--accent-foreground);
@@ -301,6 +325,8 @@
   --color-destructive-foreground: var(--destructive-foreground);
   --color-destructive-subtle: var(--destructive-subtle);
   --color-destructive-soft: var(--destructive-soft);
+  --color-destructive-subtle-hover: var(--destructive-subtle-hover);
+  --color-destructive-subtle-pressed: var(--destructive-subtle-pressed);
   --color-destructive-soft-alpha: var(--destructive-soft-alpha);
   --color-destructive-foreground-alpha: var(--destructive-foreground-alpha);
   --color-destructive-border-subtle: var(--destructive-border-subtle);

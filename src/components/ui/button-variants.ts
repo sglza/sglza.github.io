@@ -1,10 +1,7 @@
-// Adapted from coss ui (https://coss.com/ui), MIT License,
-// Copyright (c) 2025 coss.com and Origin UI.
 import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import {
   controlButtonSurfaceClassName,
-  controlOutlineSurfaceClassName,
   controlSolidSurfaceClassName,
   controlPressableClassName,
   controlDisabledClassName,
@@ -36,7 +33,7 @@ const buttonVariantStyles = cva(
       },
       variant: {
         default: [
-          "border-primary bg-primary text-primary-foreground hover:bg-(--primary-hover,color-mix(in_oklab,var(--primary)_90%,transparent)) not-disabled:not-data-disabled:active:bg-primary-pressed data-pressed:bg-primary-pressed *:data-[slot=button-loading-indicator]:text-primary-foreground",
+          "border-primary bg-primary text-primary-foreground hover:bg-(--primary-hover,var(--primary)) not-disabled:not-data-disabled:active:bg-primary-pressed data-pressed:bg-primary-pressed *:data-[slot=button-loading-indicator]:text-primary-foreground",
           controlButtonSurfaceClassName,
           controlSolidSurfaceClassName,
           controlPressableClassName,
@@ -49,21 +46,15 @@ const buttonVariantStyles = cva(
           controlPressableClassName,
           controlDisabledClassName,
         ],
-        "destructive-outline": [
-          "[--control-disabled-border:var(--destructive-border)] border-destructive-border bg-transparent text-destructive-foreground hover:bg-destructive-subtle not-disabled:not-data-disabled:active:bg-destructive-soft data-pressed:bg-destructive-soft *:data-[slot=button-loading-indicator]:text-foreground",
-          controlOutlineSurfaceClassName,
+        "destructive-secondary": [
+          "[--control-disabled-border:transparent] border-transparent bg-destructive-subtle text-destructive-foreground-alpha hover:bg-destructive-subtle-hover not-disabled:not-data-disabled:active:bg-destructive-subtle-pressed data-pressed:bg-destructive-subtle-pressed *:data-[slot=button-loading-indicator]:text-destructive-foreground-alpha",
+          controlButtonSurfaceClassName,
           controlPressableClassName,
           controlDisabledClassName,
         ],
         ghost:
           "border-transparent text-foreground hover:bg-accent not-disabled:not-data-disabled:active:bg-accent-pressed data-pressed:bg-accent-pressed *:data-[slot=button-loading-indicator]:text-foreground",
         link: "border-transparent text-foreground underline-offset-4 hover:underline data-pressed:underline *:data-[slot=button-loading-indicator]:text-foreground",
-        outline: [
-          "border-input bg-transparent text-foreground hover:bg-accent not-disabled:not-data-disabled:active:bg-accent-pressed data-pressed:bg-accent-pressed *:data-[slot=button-loading-indicator]:text-foreground",
-          controlOutlineSurfaceClassName,
-          controlPressableClassName,
-          controlDisabledClassName,
-        ],
         secondary: [
           "[--control-disabled-border:transparent] border-transparent bg-secondary text-secondary-foreground hover:bg-secondary-hover not-disabled:not-data-disabled:active:bg-secondary-pressed data-pressed:bg-secondary-pressed *:data-[slot=button-loading-indicator]:text-secondary-foreground",
           controlButtonSurfaceClassName,

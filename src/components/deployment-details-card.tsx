@@ -40,11 +40,11 @@ export function DeploymentDetailsCard({
       <div className="flex flex-col gap-3 border-b px-4 py-2 sm:flex-row sm:items-center sm:justify-between">
         <p className="font-semibold text-sm">Deployment details</p>
         <div className="flex items-center gap-2">
-          <Button size="sm" variant="outline">
+          <Button size="sm" variant="secondary">
             <Share2Icon aria-hidden="true" />
             Share
           </Button>
-          <Button ref={targetRefs?.logs} size="sm" variant="outline">
+          <Button ref={targetRefs?.logs} size="sm" variant="secondary">
             <ListIcon aria-hidden="true" />
             Logs
           </Button>

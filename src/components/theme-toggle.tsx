@@ -51,7 +51,7 @@ export function ThemeToggle() {
         onPressedChange={handleCheckedChange}
         pressed={isDark}
         size="default"
-        variant="outline"
+        variant="secondary"
       >
         {isDark || !mounted ? (
           <SunIcon aria-hidden="true" />
