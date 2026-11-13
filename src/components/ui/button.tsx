@@ -24,7 +24,7 @@ export interface ButtonProps extends useRender.ComponentProps<"button"> {
  * link with `buttonVariants` so it keeps link semantics:
  *
  * ```tsx
- * <Link href="/docs" className={buttonVariants({ variant: "outline" })}>Docs</Link>
+ * <Link href="/docs" className={buttonVariants({ variant: "secondary" })}>Docs</Link>
  * ```
  */
 export function Button({

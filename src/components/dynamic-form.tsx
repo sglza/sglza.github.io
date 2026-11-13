@@ -94,7 +94,7 @@ export const DynamicForm = () => {
                   className="w-full"
                   value={isUnselected ? [] : [String(selected)]}
                   onValueChange={handleSelectOption}
-                  variant="outline"
+                  variant="secondary"
                 >
                   {SURVEY_OPTIONS?.map(({ label, value, icon }) => (
                     <ToggleGroupItem

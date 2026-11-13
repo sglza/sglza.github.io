@@ -1,7 +1,3 @@
-// Mask a one-pixel gradient to the outer contour, including the border.
-// A ring keeps the corners continuous without detached inset-shadow tips.
-// Size the face to the border box and prevent tiling into its transparent border.
-// Nested controls share this face without adding another cast shadow.
 export const controlFaceClassName =
   "border-transparent bg-origin-border bg-no-repeat bg-clip-border not-dark:bg-clip-border bg-[image:var(--control-surface)] before:pointer-events-none before:absolute before:-inset-px before:rounded-[inherit] before:p-px before:bg-[linear-gradient(180deg,var(--control-edge-top),transparent_50%,var(--control-edge-bottom))] before:[mask:linear-gradient(#000_0_0)_content-box_exclude,linear-gradient(#000_0_0)] focus-visible:before:opacity-0 has-focus-visible:before:opacity-0 aria-invalid:before:opacity-0 has-aria-invalid:before:opacity-0";
 
@@ -23,15 +19,12 @@ export const controlButtonSurfaceClassName = [
 export const controlNativeInputSurfaceClassName =
   "border-0 bg-origin-border bg-no-repeat bg-clip-border not-dark:bg-clip-border bg-[image:var(--control-surface)] shadow-(--control-shadow) inset-shadow-[0_1px_var(--control-edge-top),0_-1px_var(--control-edge-bottom)] focus-visible:border focus-visible:inset-shadow-none aria-invalid:border aria-invalid:inset-shadow-none disabled:border data-disabled:border";
 
-// Outlined faces let their surrounding surface show through.
-export const controlOutlineSurfaceClassName =
-  "bg-none shadow-(--control-shadow)";
-
 export const controlSolidSurfaceClassName =
   "[--control-surface:var(--control-solid-surface)] [--control-edge-top:var(--control-solid-edge-top)] [--control-edge-bottom:var(--control-solid-edge-bottom)] [--control-disabled-border:transparent]";
 
 // Pressing lowers the cast shadow while the face, border and bevel stay put.
-// Persistent toggles also expose data-pressed; their selected fills stay local.
+// For action controls, data-pressed describes a held press. Toggle uses it for
+// persistent selection, so its physical press treatment stays in toggle.tsx.
 export const controlPressableClassName =
   "active:shadow-none data-pressed:shadow-none";
 

@@ -36,7 +36,7 @@ export function PageHeader({ backHref, backLabel = "Back" }: PageHeaderProps) {
           <div className="flex items-center gap-2">
             <a
               aria-label="Open X profile"
-              className={buttonVariants({ size: "icon", variant: "outline" })}
+              className={buttonVariants({ size: "icon", variant: "secondary" })}
               href={CONTACT_LINKS.twitter}
               rel="noopener noreferrer"
               target="_blank"
@@ -45,7 +45,7 @@ export function PageHeader({ backHref, backLabel = "Back" }: PageHeaderProps) {
             </a>
             <a
               aria-label="Send email"
-              className={buttonVariants({ size: "icon", variant: "outline" })}
+              className={buttonVariants({ size: "icon", variant: "secondary" })}
               href={CONTACT_LINKS.email}
             >
               <AtSignIcon aria-hidden="true" />

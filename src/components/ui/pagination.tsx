@@ -33,7 +33,7 @@ export function PaginationContent({
 }: React.ComponentProps<"ul">): React.ReactElement {
   return (
     <ul
-      className={cn("flex flex-row items-center gap-1", className)}
+      className={cn("gap-1 flex flex-row items-center", className)}
       data-slot="pagination-content"
       {...props}
     />
@@ -65,7 +65,7 @@ export function PaginationLink({
       : cn(
           buttonVariants({
             size,
-            variant: isActive ? "outline" : "ghost",
+            variant: isActive ? "secondary" : "ghost",
           }),
           className,
         ),
@@ -121,7 +121,7 @@ export function PaginationEllipsis({
   return (
     <span
       aria-hidden
-      className={cn("flex min-w-7 justify-center", className)}
+      className={cn("min-w-7 flex justify-center", className)}
       data-slot="pagination-ellipsis"
       {...props}
     >

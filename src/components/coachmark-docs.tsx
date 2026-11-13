@@ -210,7 +210,7 @@ export function CoachmarkDocs() {
 
               <div className="mt-8 flex flex-wrap gap-2">
                 <a
-                  className={buttonVariants({ variant: "outline" })}
+                  className={buttonVariants({ variant: "secondary" })}
                   href="https://github.com/sglza/coachmark"
                   rel="noopener noreferrer"
                   target="_blank"
@@ -219,7 +219,7 @@ export function CoachmarkDocs() {
                   GitHub
                 </a>
                 <a
-                  className={buttonVariants({ variant: "outline" })}
+                  className={buttonVariants({ variant: "secondary" })}
                   href="/coachmark.md"
                 >
                   <FaMarkdown aria-hidden="true" />
@@ -519,7 +519,7 @@ function StylingModeControl({
       }}
       size="sm"
       value={[value]}
-      variant="outline"
+      variant="secondary"
     >
       <ToggleGroupItem value="tailwind">Tailwind</ToggleGroupItem>
       <ToggleGroupItem value="css-modules">CSS Modules</ToggleGroupItem>
@@ -1226,7 +1226,7 @@ function InstallCommand() {
           }}
           size="sm"
           value={[packageManager]}
-          variant="outline"
+          variant="secondary"
         >
           <ToggleGroupItem value="pnpm">pnpm</ToggleGroupItem>
           <ToggleGroupItem value="npm">npm</ToggleGroupItem>
